@@ -3,23 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Configurateur Salle — TCF</title>
+<title>Configurateur Salle TCF</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --g:#78BE20;--navy:#1A2E45;--dark:#0D1920;
-  --tv:#78BE20;--lm:#0066B3;--lea:#1A1A1A;--rk:#1C3A6B;
-  --bg:#F4F6F9;--card:#fff;--bd:#DDE3ED;
-  --tx:#1E293B;--mt:#64748B;--lg:#F0F7E6;
-}
+:root{--g:#78BE20;--navy:#1A2E45;--dark:#0D1920;--tv:#78BE20;--lm:#0066B3;--lea:#1A1A1A;--rk:#1C3A6B;--uc:#6B3FA0;--bg:#F4F6F9;--card:#fff;--bd:#DDE3ED;--tx:#1E293B;--mt:#64748B;--lg:#F0F7E6;}
 body{font-family:Arial,sans-serif;background:var(--bg);color:var(--tx);font-size:14px;min-width:320px}
 a.pl{font-size:10px;color:var(--lm);text-decoration:none;margin-left:4px}
 a.pl:hover{text-decoration:underline}
 .hdr{background:var(--dark);border-top:3px solid var(--g);padding:9px 16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
-.hb{color:#fff;font-size:12px}.hb b{color:var(--g)}
-.hsub{color:#78A0C0;font-size:10px;margin-top:1px}
+.hb{color:#fff;font-size:12px}.hb b{color:var(--g)}.hsub{color:#78A0C0;font-size:10px;margin-top:1px}
 .ht{display:flex;align-items:center;gap:7px}
-.htitle{color:#fff;font-size:13px;font-weight:700}
 .mbtn{padding:4px 11px;border-radius:5px;border:1px solid rgba(255,255,255,.25);background:transparent;color:rgba(255,255,255,.55);font-size:11px;font-weight:600;cursor:pointer}
 .mbtn.on{background:var(--g);border-color:var(--g);color:#fff}
 .bbar{display:flex;align-items:center;gap:10px;background:var(--navy);padding:7px 16px;flex-wrap:wrap}
@@ -29,7 +22,7 @@ a.pl:hover{text-decoration:underline}
 .bt2.on{background:var(--g);color:#fff}
 .bnote{color:#78A0C0;font-size:11px}
 .wrap{display:flex;align-items:flex-start}
-.sidebar{width:300px;min-width:300px;background:var(--card);border-right:1px solid var(--bd);padding:12px;flex-shrink:0}
+.sidebar{width:320px;min-width:320px;background:var(--card);border-right:1px solid var(--bd);padding:12px;flex-shrink:0}
 .sidebar.hid{display:none}
 .main{flex:1;min-width:0;padding:14px;background:var(--bg)}
 .card{background:var(--card);border:1px solid var(--bd);border-radius:7px;margin-bottom:10px}
@@ -37,63 +30,78 @@ a.pl:hover{text-decoration:underline}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--g);flex-shrink:0}
 .cb{padding:11px 12px}
 .fl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--mt);margin-bottom:5px;display:flex;justify-content:space-between;align-items:center}
-.fl .v{color:var(--g);font-size:13px;font-weight:700;text-transform:none}
+.v{color:var(--g);font-size:13px;font-weight:700;text-transform:none}
 .fg{margin-bottom:10px}
 input[type=range]{width:100%;accent-color:var(--g);cursor:pointer;display:block;margin:4px 0}
 input[type=number]{width:50px;padding:3px 5px;border:1px solid var(--bd);border-radius:5px;font-size:13px;text-align:center;color:var(--tx);background:#fff}
-input[type=checkbox]{accent-color:var(--g);cursor:pointer;width:14px;height:14px;vertical-align:middle}
+input[type=checkbox]{accent-color:var(--g);cursor:pointer;width:14px;height:14px;vertical-align:middle;flex-shrink:0}
 .tg{display:flex;border:1px solid var(--bd);border-radius:6px;overflow:hidden;margin-bottom:8px}
 .tb{flex:1;padding:6px 3px;font-size:10.5px;font-weight:500;cursor:pointer;background:#fff;border:none;color:var(--mt);text-align:center;line-height:1.3}
 .tb.on{background:var(--navy);color:#fff}
 .tb:hover:not(.on):not(.lk){background:var(--lg)}
 .tb.lk{opacity:.35;cursor:not-allowed}
-.ss{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:8px}
-.so{border:1.5px solid var(--bd);border-radius:6px;padding:8px 7px;cursor:pointer;background:#fff;text-align:left}
-.so:hover,.so.on{border-color:var(--g);background:var(--lg)}
-.so.on{box-shadow:0 0 0 2px #78BE2030}
+.cat-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:700;margin:6px 0 2px}
+.cat-badge.petit{background:#F0F7E6;border:1px solid #C8DFB0;color:#3A6B10}
+.cat-badge.moyen{background:#EFF6FF;border:1px solid #BFDBFE;color:#1E40AF}
+.cat-badge.grand{background:#F5F3FF;border:1px solid #C4B5FD;color:#5B21B6}
+.cat-dot{width:8px;height:8px;border-radius:50%}
+.ba-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-bottom:8px}
+.ba{border:1.5px solid var(--bd);border-radius:6px;padding:8px 5px;cursor:pointer;background:#fff;text-align:center}
+.ba:hover{border-color:var(--g);background:var(--lg)}
+.ba.on.eco{border-color:#3A7010;background:#F0F7E6}
+.ba.on.std{border-color:#1E40AF;background:#EFF6FF}
+.ba.on.prm{border-color:#5B21B6;background:#F5F3FF}
+.ba-n{font-size:11px;font-weight:700;display:block;color:var(--navy);margin-bottom:1px}
+.ba-s{font-size:8.5px;color:var(--mt);display:block}
+.sys-group-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--mt);margin-bottom:5px;margin-top:4px}
+.sys-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:6px}
+.so{border:1.5px solid var(--bd);border-radius:6px;padding:8px 7px;cursor:pointer;background:#fff;text-align:left;width:100%}
+.so:hover{border-color:var(--g);background:var(--lg)}
+.so.on{border-color:var(--g);background:var(--lg);box-shadow:0 0 0 2px rgba(120,190,32,.2)}
+.so.uco-btn:hover,.so.uco-btn.on{border-color:var(--uc);background:#F5F3FF;box-shadow:0 0 0 2px rgba(107,63,160,.2)}
 .son{font-size:11px;font-weight:700;color:var(--navy);margin-bottom:1px}
 .so.on .son{color:#3A7010}
-.sos{font-size:9px;color:var(--mt);line-height:1.3}
-/* UniCOS badge */
-.ubadge{display:inline-block;font-size:9px;font-weight:700;color:#fff;background:#7C5C8A;padding:1px 5px;border-radius:3px;margin-left:4px;vertical-align:middle}
+.so.uco-btn.on .son{color:var(--uc)}
+.sos{font-size:9px;color:var(--mt)}
 .ib{border-radius:5px;padding:6px 10px;font-size:11px;line-height:1.5;margin-top:6px}
 .ib.g{background:#F0F7E6;border:1px solid #C8DFB0;color:#3A6B10}
 .ib.a{background:#FEF9E7;border:1px solid #E5C97B;color:#7A5100}
-.ib.r{background:#FEF2F2;border:1px solid #FCA5A5;color:#991B1B}
 .ib.b{background:#EFF6FF;border:1px solid #BFDBFE;color:#1E40AF}
 .ib.p{background:#F5F3FF;border:1px solid #C4B5FD;color:#5B21B6}
-.tw{position:relative;display:inline-flex;align-items:center}
-.tq{width:14px;height:14px;border-radius:50%;background:var(--mt);color:#fff;font-size:8px;font-weight:700;border:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;margin-left:4px;line-height:1;flex-shrink:0}
-.tp{position:absolute;left:calc(100%+6px);top:50%;transform:translateY(-50%);z-index:1000;background:var(--dark);color:#fff;border-radius:6px;padding:7px 11px;font-size:11px;line-height:1.5;width:210px;pointer-events:none;opacity:0;transition:opacity .15s;border:1px solid rgba(255,255,255,.1);white-space:normal}
-.tw:hover .tp{opacity:1}
-/* Ajusteur ± */
+.lic-row{display:flex;align-items:center;gap:8px;font-size:11px;cursor:pointer;padding:5px 8px;border:1px solid var(--bd);border-radius:5px;background:#fff;margin-bottom:4px;transition:all .12s}
+.lic-row:hover{border-color:var(--g);background:var(--lg)}
+.lic-row.checked{border-color:var(--g);background:#F0F7E6}
+.lic-price{margin-left:auto;font-size:10px;color:var(--mt);font-weight:600;white-space:nowrap}
+.uco-pres-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin:5px 0}
+.upres-btn{border:1.5px solid var(--bd);border-radius:5px;padding:6px 5px;cursor:pointer;background:#fff;text-align:center;font-size:10px;font-weight:600;color:var(--mt)}
+.upres-btn:hover{border-color:var(--uc);background:#F5F3FF;color:var(--uc)}
+.upres-btn.on{border-color:var(--uc);background:var(--uc);color:#fff}
 .adj{display:flex;align-items:center;gap:7px;margin:5px 0}
 .adjn{font-size:24px;font-weight:700;color:var(--g);min-width:28px;text-align:center;line-height:1}
 .adjsub{font-size:9px;color:var(--mt);text-align:center}
 .icob{width:26px;height:26px;border-radius:5px;border:1px solid var(--bd);background:#fff;cursor:pointer;font-size:15px;display:inline-flex;align-items:center;justify-content:center;color:var(--navy)}
 .icob:hover{background:var(--lg);border-color:var(--g)}
-.drow{display:flex;align-items:center;gap:7px;padding:7px 0;border-top:1px solid var(--bd);margin-top:6px;font-size:12px;color:var(--tx)}
+.drow{display:flex;align-items:center;gap:7px;padding:6px 0;border-top:1px solid var(--bd);margin-top:6px;font-size:12px;color:var(--tx)}
 .wbox{background:#F8FAFC;border:1px solid var(--bd);border-radius:6px;padding:9px 11px;margin-top:9px}
 .wbox h4{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--mt);margin-bottom:6px}
 .wr{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #EEF0F3;font-size:11px}
 .wr:last-child{border:none;padding-top:5px;font-weight:700}
-.wl{color:var(--mt)}.wv{color:var(--tx)}
-.wok{color:#3A6B10}.wno{color:#991B1B}
+.wl{color:var(--mt)}.wv{color:var(--tx)}.wok{color:#3A6B10}.wno{color:#991B1B}
 .sbar{background:var(--navy);border-radius:7px;padding:10px 14px;margin-bottom:12px;display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-.si .sl{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#78A0C0;margin-bottom:2px;white-space:nowrap}
+.si .sl{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#78A0C0;margin-bottom:2px}
 .si .sv{font-size:16px;font-weight:700;color:var(--g);line-height:1}
-.si .ss{font-size:9px;color:#9EB8D0;margin-top:2px;word-break:break-word;line-height:1.3}
-.diag-wrap{overflow-x:auto;margin-bottom:10px;padding-bottom:4px}
+.si .ss{font-size:9px;color:#9EB8D0;margin-top:2px;line-height:1.3;word-break:break-word}
+.dw{overflow-x:auto;margin-bottom:10px;padding-bottom:4px}
 .diag{display:flex;align-items:center;gap:4px;min-width:max-content}
 .db{padding:4px 9px;border-radius:4px;font-size:11px;font-weight:700;color:#fff;white-space:nowrap}
-.da{color:var(--mt);font-size:11px;flex-shrink:0}
+.da{color:var(--mt);font-size:11px}
 .rwrap{background:var(--card);border:1px solid var(--bd);border-radius:7px;padding:11px;margin-bottom:10px}
 .rh{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--mt);margin-bottom:7px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:4px}
 .rdlbl{font-size:11px;color:var(--g);font-weight:700;text-transform:none}
 .rleg{display:flex;gap:10px;margin-top:7px;flex-wrap:wrap}
 .li{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--mt)}
 .ld{width:9px;height:9px;flex-shrink:0}
-.brow{display:grid;grid-template-columns:auto 1fr auto auto auto;gap:6px;align-items:center;padding:5px 7px;border-radius:5px;min-width:0}
+.brow{display:grid;grid-template-columns:auto 1fr auto auto auto;gap:6px;align-items:center;padding:5px 7px;border-radius:5px}
 .brow:hover{background:var(--bg)}
 .bsub{display:grid;grid-template-columns:auto 1fr auto auto auto;gap:6px;align-items:center;padding:6px 9px;border-radius:5px;margin-top:5px}
 .grand{background:var(--navy);border-radius:7px;padding:11px 14px;display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
@@ -102,178 +110,187 @@ input[type=checkbox]{accent-color:var(--g);cursor:pointer;width:14px;height:14px
 .bq{font-size:11px;color:var(--mt);text-align:center;white-space:nowrap}
 .bu{font-size:11px;color:var(--mt);text-align:right;white-space:nowrap}
 .bt{font-size:12px;font-weight:700;text-align:right;white-space:nowrap;min-width:80px}
+.utag{font-size:9px;font-weight:700;background:#6B3FA0;color:#fff;padding:1px 5px;border-radius:3px;margin-left:4px;white-space:nowrap}
+.opt-row{border-left:3px solid #B87600;background:#FEF9E7;padding:6px 10px;border-radius:0 5px 5px 0;margin-top:6px;font-size:11px;color:#5A3800}
+.coher{border-radius:5px;padding:5px 10px;font-size:10.5px;margin-bottom:10px}
+.coher.warn{background:#FEF9E7;border:1px solid #E5C97B;color:#7A5100}
+.coher.bad{background:#FEF2F2;border:1px solid #FCA5A5;color:#991B1B}
+.fc-grid2{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:8px}
+.fc{border:1.5px solid var(--bd);border-radius:6px;padding:7px 6px;cursor:pointer;background:#fff;text-align:center}
+.fc:hover,.fc.on{border-color:var(--g);background:var(--lg)}
+.fc.on{box-shadow:0 0 0 2px rgba(120,190,32,.2)}
+.fci{font-size:16px;display:block;margin-bottom:2px}
+.fcn{font-size:10.5px;font-weight:700;color:var(--navy);display:block}
+.fc.on .fcn{color:#3A7010}
+.fcs{font-size:8.5px;color:var(--mt);display:block}
 .acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
 .ab{padding:7px 13px;border-radius:6px;border:1px solid var(--bd);background:#fff;cursor:pointer;font-size:11.5px;font-weight:600;color:var(--navy);white-space:nowrap}
 .ab:hover{background:var(--lg);border-color:var(--g)}
 .ab.p{background:var(--navy);color:#fff;border-color:var(--navy)}
 .spanel{background:#fff;border:1.5px solid var(--g);border-radius:7px;padding:13px;margin-top:10px}
 .spanel pre{font-size:10.5px;line-height:1.7;color:var(--tx);white-space:pre-wrap;font-family:monospace;background:var(--bg);border-radius:5px;padding:9px;border:1px solid var(--bd);margin-top:7px}
-/* Audio rule table */
-.rtable{width:100%;border-collapse:collapse;font-size:10px;margin-top:6px}
-.rtable th{background:#1A2E45;color:#fff;padding:4px 7px;text-align:left;font-weight:600}
-.rtable td{padding:4px 7px;border-bottom:0.5px solid var(--bd);color:var(--mt)}
-.rtable tr:last-child td{border:none}
-.rtable .hl{color:var(--g);font-weight:700}
+.div{border-top:1px solid var(--bd);margin:8px 0}
 .hid{display:none!important}
 @media print{.hdr,.bbar,.sidebar,.acts,.spanel{display:none!important}.wrap{display:block}.main{padding:0}}
 </style>
 </head>
 <body>
 <div class="hdr">
-  <div>
-    <div class="hb">televic conference <b>FRANCE</b></div>
-    <div class="hsub">Configurateur de salle — BU Conférence IDF</div>
-  </div>
+  <div><div class="hb">televic conference <b>FRANCE</b></div><div class="hsub">Configurateur de salle &mdash; BU Conf&eacute;rence IDF</div></div>
   <div class="ht">
-    <span class="htitle">Configurateur Salle</span>
-    <button class="mbtn" id="mb-edit" onclick="setMode('edit')">Modifier</button>
-    <button class="mbtn on" id="mb-read" onclick="setMode('read')">Lecture</button>
+    <span style="color:#fff;font-size:13px;font-weight:700">Configurateur Salle</span>
+    <button class="mbtn" id="mb-edit">Modifier</button>
+    <button class="mbtn on" id="mb-read">Lecture</button>
   </div>
 </div>
 <div class="bbar">
-  <span class="blbl">Budget</span>
-  <div class="btog">
-    <button class="bt2 on" id="bb-y" onclick="setBudget(true)">Avec budget</button>
-    <button class="bt2" id="bb-n" onclick="setBudget(false)">Sans budget</button>
-  </div>
-  <span class="bnote" id="bnote">Options évolutives, premium et UniCOS disponibles</span>
+  <span class="blbl">Budget Televic</span>
+  <div class="btog"><button class="bt2 on" id="bb-y">Avec budget</button><button class="bt2" id="bb-n">Sans budget</button></div>
+  <span class="bnote" id="bnote">Options premium, UniCOS et fonctionnalites disponibles</span>
 </div>
 <div class="wrap">
 <div class="sidebar hid" id="sidebar">
 
-  <!-- Participants -->
   <div class="card">
-    <div class="ch"><div class="dot"></div>Participants</div>
+    <div class="ch"><div class="dot"></div>Participants &amp; cat&eacute;gorie</div>
     <div class="cb">
       <div class="fl">Postes <span class="v" id="lp">10</span></div>
-      <input type="range" min="1" max="60" value="10" id="slp" oninput="update()">
-      <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--mt)"><span>1</span><span>30</span><span>60</span></div>
+      <input type="range" min="1" max="60" value="10" id="slp">
+      <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--mt)"><span>1</span><span>25</span><span>45</span><span>60</span></div>
+      <div id="cat-badge-wrap" style="margin-top:8px"></div>
+      <div style="font-size:9px;color:var(--mt);margin-top:4px">Petite &lt;25 &middot; Moyenne 25-45 &middot; Grande 45+</div>
     </div>
   </div>
 
-  <!-- Système Televic -->
   <div class="card">
-    <div class="ch"><div class="dot"></div>Système Televic</div>
+    <div class="ch"><div class="dot"></div>Syst&egrave;me de conf&eacute;rence &mdash; Televic</div>
     <div class="cb">
-      <div class="ss">
-        <button class="so on" data-s="dcerno" onclick="setSys('dcerno')"><div class="son">D-CERNO</div><div class="sos">Filaire · Discuss/Decide</div></button>
-        <button class="so" data-s="go" onclick="setSys('go')"><div class="son">Confidea GO G4</div><div class="sos">Sans fil · Discussion</div></button>
-        <button class="so" data-s="flex4" onclick="setSys('flex4')"><div class="son">Confidea FLEX G4</div><div class="sos">Sans fil · Vote · Badge</div></button>
-        <button class="so" data-s="plixus" onclick="setSys('plixus')"><div class="son">Confidea FLEX</div><div class="sos">Plixus AE-R · IP</div></button>
+
+      <div class="sys-group-lbl">Syst&egrave;mes filaires &amp; sans fil</div>
+      <div class="sys-grid">
+        <button class="so on" id="sys-dcerno"><div class="son">D-CERNO</div><div class="sos">Filaire &middot; Discuss/Decide</div></button>
+        <button class="so" id="sys-go"><div class="son">Confidea GO G4</div><div class="sos">Sans fil &middot; Discussion</div></button>
+        <button class="so" id="sys-flex4"><div class="son">Confidea FLEX G4</div><div class="sos">Sans fil &middot; Vote &middot; Badge</div></button>
+        <button class="so" id="sys-plixus"><div class="son">Confidea FLEX</div><div class="sos">Plixus AE-R &middot; IP</div></button>
       </div>
-      <!-- UniCOS — budget uniquement -->
-      <div id="unicos-sec" class="hid">
-        <div class="fl" style="margin-bottom:5px">UniCOS — Multimédia <span class="ubadge">BUDGET</span>
-          <span class="tw"><button class="tq">?</button><div class="tp">UniCOS Core T : unité multimédia tout-en-un, écran tactile, micro intégré, symboles universels. UniCOS Pro : version avancée avec caméra et meilleures performances. Toujours sur Plixus/réseau IP.</div></span>
-        </div>
-        <div class="tg">
-          <button class="tb on" id="tb-uco-n" onclick="setUniCOS(false)">Sans UniCOS</button>
-          <button class="tb" id="tb-uco-c" onclick="setUniCOS('core')">UniCOS Core T</button>
-          <button class="tb" id="tb-uco-p" onclick="setUniCOS('pro')">UniCOS Pro</button>
-        </div>
-        <div id="unicos-info"></div>
-      </div>
-      <!-- Discuss/Decide (D-CERNO only) -->
+
+      <!-- Discuss / Decide — au dessus de UniCOS -->
       <div id="ddsec" class="hid">
-        <div class="fl" style="margin-bottom:5px">Fonctionnalité
-          <span class="tw"><button class="tq">?</button><div class="tp">DISCUSS : gestion de parole. DECIDE : vote électronique par licence logicielle sur le même matériel (tarif sur devis).</div></span>
-        </div>
+        <div class="fl" style="margin-bottom:5px">Mode de conf&eacute;rence</div>
         <div class="tg">
-          <button class="tb on" id="tb-disc" onclick="setEvol(false)">DISCUSS<br><span style="font-size:8.5px">Discussion</span></button>
-          <button class="tb" id="tb-deci" onclick="setEvol(true)">DECIDE / Vote<br><span style="font-size:8.5px">+ Licence logicielle</span></button>
+          <button class="tb on" id="tb-disc">DISCUSS<br><span style="font-size:8px">Gestion de parole</span></button>
+          <button class="tb" id="tb-deci">DECIDE / Vote<br><span style="font-size:8px">Vote + identification</span></button>
         </div>
         <div id="ddinfo"></div>
       </div>
+
+      <!-- Licences D-CERNO / FLEX -->
+      <div id="lic-sec" class="hid">
+        <div class="fl" style="margin-bottom:5px">Licences &amp; logiciels</div>
+        <label class="lic-row" id="lic-row-decide"><input type="checkbox" id="cb-decide">Logiciel D-CERNO DECIDE &mdash; vote + id<span class="lic-price">Sur devis</span></label>
+        <label class="lic-row" id="lic-row-vote"><input type="checkbox" id="cb-vote">Licence VOTE &eacute;lectronique<span class="lic-price">Sur devis</span></label>
+        <label class="lic-row" id="lic-row-id"><input type="checkbox" id="cb-id">Licence IDENTIFICATION NFC<span class="lic-price">Sur devis</span></label>
+        <label class="lic-row" id="lic-row-c360"><input type="checkbox" id="cb-c360">Logiciel Confero 360<span class="lic-price">Sur devis</span></label>
+      </div>
+
+      <div class="div"></div>
+      <div class="sys-group-lbl" style="color:var(--uc)">UniCOS &mdash; Postes multim&eacute;dia sur Plixus MME</div>
+      <div class="sys-grid">
+        <button class="so uco-btn" id="sys-uco-core"><div class="son">UniCOS Core T</div><div class="sos">Ecran tactile &middot; symboles &middot; micro</div></button>
+        <button class="so uco-btn" id="sys-uco-pro"><div class="son">UniCOS Pro</div><div class="sos">Camera int&eacute;gr&eacute;e &middot; HD &middot; mod&eacute;ration</div></button>
+        <button class="so uco-btn" id="sys-uco-mm10"><div class="son">UniCOS T/MM10</div><div class="sos">Multimedia 10&quot; &middot; plateforme distante</div></button>
+        <button class="so uco-btn" id="sys-uco-mm7"><div class="son">UniCOS F/MM7</div><div class="sos">Encastrable 7&quot; &middot; Lingua ID-MM</div></button>
+      </div>
+
+      <!-- UniCOS mix president -->
+      <div id="uco-mix-sec" class="hid">
+        <div class="fl" style="margin-bottom:4px">Poste pr&eacute;sident diff&eacute;rent ?</div>
+        <div class="uco-pres-grid">
+          <button class="upres-btn" id="upres-core">Core T</button>
+          <button class="upres-btn" id="upres-pro">Pro</button>
+          <button class="upres-btn" id="upres-mm10">T/MM10</button>
+          <button class="upres-btn" id="upres-mm7">F/MM7</button>
+        </div>
+        <div class="fl" style="margin-top:6px;margin-bottom:4px">Nb postes pr&eacute;sident <span class="v" id="lbl-pres-n">1</span></div>
+        <input type="range" min="1" max="5" value="1" id="sl-pres-n">
+        <div id="uco-mix-info"></div>
+      </div>
+
       <div id="sysinfo"></div>
     </div>
   </div>
 
-  <!-- Caméras -->
   <div class="card">
-    <div class="ch"><div class="dot" style="background:var(--lm)"></div>Caméras Lumens</div>
+    <div class="ch"><div class="dot" style="background:var(--lm)"></div>Cam&eacute;ras Lumens</div>
     <div class="cb">
-      <div class="fl">Modèle <span class="tw"><button class="tq">?</button><div class="tp">VC-R31 : fixe 84°, ≤10. VC-TR40 : tracking IA, zoom 20×. VC-TR61 : 4K broadcast, ≥20 + budget premium.</div></span><span class="v" id="lcam">VC-R31</span></div>
-      <div id="cprem-sec">
-        <div class="tg"><button class="tb on" id="tb-cstd" onclick="setCamP(false)">Standard<br><span style="font-size:8.5px">R31/TR40</span></button><button class="tb" id="tb-cprem" onclick="setCamP(true)">Premium<br><span style="font-size:8.5px">TR61 si ≥20</span></button></div>
-      </div>
+      <div class="fl">Mod&egrave;le <span class="v" id="lcam">VC-R31</span></div>
+      <div id="cprem-sec"><div class="tg">
+        <button class="tb on" id="tb-cstd">Standard<br><span style="font-size:8.5px">R31 / TR40</span></button>
+        <button class="tb" id="tb-cprem">Premium<br><span style="font-size:8.5px">TR61 / A71P</span></button>
+      </div></div>
       <div class="fl">Auto <span class="v" id="lnauto">2</span></div>
       <div class="adj">
-        <button class="icob" onclick="cdelta(-1)">−</button>
+        <button class="icob" id="cam-m">&#8722;</button>
         <div><div class="adjn" id="ctot">2</div><div class="adjsub" id="cxtralbl">auto</div></div>
-        <button class="icob" onclick="cdelta(1)">+</button>
+        <button class="icob" id="cam-p">+</button>
         <div id="crule" style="font-size:10px;color:var(--mt);flex:1;padding-left:5px;line-height:1.3"></div>
       </div>
     </div>
   </div>
 
-  <!-- Acoustique -->
   <div class="card">
-    <div class="ch"><div class="dot" style="background:var(--rk)"></div>Acoustique — Renkus × LEA</div>
+    <div class="ch"><div class="dot" style="background:var(--rk)"></div>Acoustique &mdash; Renkus &times; LEA</div>
     <div class="cb">
       <div class="fg">
-        <div class="fl">Surface <span class="v" id="ls">60 m²</span></div>
-        <input type="range" min="20" max="200" step="5" value="60" id="sls" oninput="update()">
+        <div class="fl">Surface m&sup2; <span class="v" id="ls">60 m&sup2;</span></div>
+        <input type="range" min="20" max="250" step="5" value="60" id="sls">
+        <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--mt)"><span>20</span><span>120</span><span>250</span></div>
       </div>
-      <div class="fl" style="margin-bottom:5px">Dimensions L × l (m) <span class="tw"><button class="tq">?</button><div class="tp">Les dimensions génèrent le schéma de salle.</div></span></div>
+      <div class="fl" style="margin-bottom:5px">Dimensions L &times; l (m)</div>
       <div style="display:flex;align-items:center;gap:6px;margin-bottom:9px">
-        <input type="number" id="rx" placeholder="L" min="2" max="60" oninput="dimsChg()">
-        <span style="color:var(--mt)">×</span>
-        <input type="number" id="ry" placeholder="l" min="2" max="60" oninput="dimsChg()">
+        <input type="number" id="rx" placeholder="L" min="2" max="60">
+        <span style="color:var(--mt)">&times;</span>
+        <input type="number" id="ry" placeholder="l" min="2" max="60">
         <span style="font-size:11px;color:var(--mt)">m</span>
         <span id="dnote" style="font-size:10px;color:var(--g);flex:1;text-align:right"></span>
       </div>
-      <div class="tg" style="margin-bottom:6px">
-        <button class="tb on" id="bs1" onclick="snapS(60)">≤60m²</button>
-        <button class="tb" id="bs2" onclick="snapS(80)">≤80m²</button>
-        <button class="tb" id="bs3" onclick="snapS(120)">≤120m²</button>
-        <button class="tb" id="bs4" onclick="snapS(160)">≤160m²</button>
-        <button class="tb" id="bs5" onclick="snapS(200)">+160m²</button>
+      <div class="fl" style="margin-bottom:5px">Budget audio</div>
+      <div class="ba-grid">
+        <button class="ba eco on" id="ba-eco"><span class="ba-n">Eco</span><span class="ba-s">Passif</span></button>
+        <button class="ba std" id="ba-std"><span class="ba-n">Standard</span><span class="ba-s">UBX passif</span></button>
+        <button class="ba prm" id="ba-prm"><span class="ba-n">Premium</span><span class="ba-s">Actif forc&eacute;</span></button>
       </div>
-
-      <!-- Passif / Actif -->
-      <div class="fl" style="margin-bottom:5px">Type <span class="tw"><button class="tq">?</button><div class="tp">Passif = enceintes Renkus + ampli LEA. Actif = colonnes ICC12/3-RD Renkus avec ampli intégré et pilotage RHAON — budget requis, Dante natif.</div></span></div>
+      <div class="fl" style="margin-bottom:5px">Usage audio</div>
+      <div class="fc-grid2">
+        <button class="fc on" id="au-voice"><span class="fci">&#x1F3A4;</span><span class="fcn">Voix</span><span class="fcs">Conf&eacute;rence</span></button>
+        <button class="fc" id="au-media"><span class="fci">&#x1F3AC;</span><span class="fcn">Voix + M&eacute;dia</span><span class="fcs">Pr&eacute;sentation AV</span></button>
+      </div>
+      <div class="fl" style="margin-bottom:5px">Surface</div>
       <div class="tg">
-        <button class="tb on" id="tb-pass" onclick="setAT('passive')">Passif<br><span style="font-size:8.5px">LEA + Renkus</span></button>
-        <button class="tb" id="tb-act" onclick="setAT('active')">Actif ICONYX<br><span style="font-size:8.5px">ICC12 — Budget</span></button>
+        <button class="tb on" id="tb-flat">Plate<br><span style="font-size:8.5px">Standard</span></button>
+        <button class="tb" id="tb-slope">En pente<br><span style="font-size:8.5px">Amphi / Gradins</span></button>
       </div>
-
-      <!-- Point / Colonne (passif only) -->
-      <div id="colsec">
-        <div class="fl" style="margin-bottom:5px">Config. <span class="tw"><button class="tq">?</button><div class="tp">Point source (CX) : enceinte compacte, ≤80m². Colonne passive (UBX-4/8/16) : faisceau descendant, portée 15→45m selon modèle — budget requis.</div></span></div>
-        <div class="tg">
-          <button class="tb on" id="tb-pt" onclick="setAC('point')">Point source<br><span style="font-size:8.5px">CX41/CX61</span></button>
-          <button class="tb" id="tb-col" onclick="setAC('column')">Colonne passve<br><span style="font-size:8.5px">UBX-4/8/16</span></button>
-        </div>
+      <div class="fl" style="margin-bottom:5px">Type d'enceinte</div>
+      <div class="tg">
+        <button class="tb on" id="spk-auto">Auto<br><span style="font-size:8px">Selon salle</span></button>
+        <button class="tb" id="spk-point">Point source<br><span style="font-size:8px">CX41/CX61/CA61</span></button>
+        <button class="tb" id="spk-col">Colonne<br><span style="font-size:8px">UBX/ICC/IC</span></button>
       </div>
-
-      <!-- Dante -->
       <div class="drow" id="dantesec">
-        <input type="checkbox" id="cb-dante" onchange="update()">
-        <label for="cb-dante">Option Dante <span class="tw"><button class="tq">?</button><div class="tp" style="left:auto;right:0;transform:none;top:calc(100%+4px)">Dante : audio sur IP. Disponible CS124/164/354 (tarif + env. 240-720€). Non disponible CS34. Natif sur ICC12/3-RD actif.</div></span></label>
+        <input type="checkbox" id="cb-dante">
+        <label for="cb-dante" style="cursor:pointer">Option Dante &mdash; r&eacute;seau audio IP</label>
       </div>
-
-      <!-- Quantité enceintes -->
-      <div class="fl" style="margin-top:8px">Pack recommandé <span class="v" id="laudio">CS34 + 4×CX41</span></div>
-      <div class="fl" style="margin-top:8px">Enceintes — auto <span class="v" id="lnauto-spk">4</span></div>
+      <div id="caisson-sec" class="hid" style="margin-top:8px">
+        <label class="lic-row" id="caisson-row"><input type="checkbox" id="cb-caisson">Caisson de basse <span id="caisson-lbl" style="font-weight:700;color:var(--navy)">CX112-S</span><span class="lic-price">Sur devis</span></label>
+      </div>
+      <div class="fl" style="margin-top:8px">Enceintes <span class="v" id="lauto-spk">auto</span></div>
       <div class="adj">
-        <button class="icob" onclick="spkdelta(-1)">−</button>
-        <div><div class="adjn" id="stot">4</div><div class="adjsub" id="sxtralbl">auto</div></div>
-        <button class="icob" onclick="spkdelta(1)">+</button>
+        <button class="icob" id="spk-m">&#8722;</button>
+        <div><div class="adjn" id="stot-spk">2</div><div class="adjsub" id="sxtralbl">auto</div></div>
+        <button class="icob" id="spk-p">+</button>
         <div id="srule" style="font-size:10px;color:var(--mt);flex:1;padding-left:5px;line-height:1.3"></div>
       </div>
-
-      <!-- Tableau de règles -->
-      <details style="margin-top:8px">
-        <summary style="font-size:10px;color:var(--mt);cursor:pointer;font-weight:600;text-transform:uppercase;letter-spacing:.04em">Règles de sélection ▸</summary>
-        <table class="rtable" style="margin-top:6px">
-          <tr><th>Surface</th><th>Point source</th><th>Colonne passive</th><th>Actif ICC</th></tr>
-          <tr><td>≤60m²</td><td class="hl">4×CX41 / CS34</td><td>2×UBX-4/CS164</td><td>2×ICC12</td></tr>
-          <tr><td>≤80m²</td><td class="hl">2×CX61 / CS124</td><td>2×UBX-4/CS164</td><td>2×ICC12</td></tr>
-          <tr><td>≤120m²</td><td>—</td><td class="hl">2×UBX-8/CS354</td><td>2×ICC12</td></tr>
-          <tr><td>≤160m²</td><td>—</td><td class="hl">2×UBX-16/CS704</td><td>2×ICC24</td></tr>
-          <tr><td>>160m²</td><td>—</td><td class="hl">4×UBX-16/CS704</td><td>2×ICC24</td></tr>
-        </table>
-      </details>
+      <div class="fl" style="margin-top:8px">Recommandation <span class="v" id="laudio">-</span></div>
     </div>
   </div>
 
@@ -282,74 +299,72 @@ input[type=checkbox]{accent-color:var(--g);cursor:pointer;width:14px;height:14px
 <div class="main">
   <div class="sbar">
     <div class="si"><div class="sl">Postes</div><div class="sv" id="sp">10</div><div class="ss" id="ssys">D-CERNO</div></div>
-    <div class="si"><div class="sl">Caméras</div><div class="sv" id="snc">2</div><div class="ss" id="scm">VC-R31</div></div>
-    <div class="si"><div class="sl">Surface</div><div class="sv" id="ssf">60m²</div><div class="ss" id="sau">CS34+4×CX41</div></div>
-    <div class="si"><div class="sl">Total HT</div><div class="sv" id="stot">—</div><div class="ss">prix publics</div></div>
+    <div class="si"><div class="sl">Cat&eacute;gorie</div><div class="sv" id="scat">Petite</div><div class="ss" id="scat-sub">&lt;25 pers.</div></div>
+    <div class="si"><div class="sl">Surface</div><div class="sv" id="ssf">60m&sup2;</div><div class="ss" id="sau">-</div></div>
+    <div class="si"><div class="sl">Total HT</div><div class="sv" id="stot">-</div><div class="ss">prix publics</div></div>
   </div>
-  <div class="diag-wrap"><div class="diag" id="diag"></div></div>
+  <div id="coher-box"></div>
+  <div class="dw"><div class="diag" id="diag"></div></div>
   <div class="rwrap">
-    <div class="rh">Schéma de salle — vue de dessus <span class="rdlbl" id="rdlbl"></span></div>
+    <div class="rh">Sch&eacute;ma de salle &mdash; vue de dessus <span class="rdlbl" id="rdlbl"></span></div>
     <div id="rsvg"></div>
     <div class="rleg">
-      <div class="li"><svg width="10" height="10"><polygon points="5,0 0,10 10,10" fill="#0066B3"/></svg>Caméra</div>
+      <div class="li"><svg width="10" height="10"><polygon points="5,0 0,10 10,10" fill="#0066B3"/></svg>Camera</div>
       <div class="li"><div class="ld" style="background:#1C3A6B;border-radius:50%"></div>Enceinte passive</div>
-      <div class="li"><div class="ld" style="background:#78BE20;border-radius:2px"></div>Enceinte active ICC</div>
+      <div class="li"><div class="ld" style="background:#78BE20;border-radius:2px"></div>Enceinte active</div>
     </div>
   </div>
-  <div class="card"><div class="ch"><div class="dot" style="background:var(--tv)"></div>Système de conférence — Televic</div><div class="cb" id="bomtv"></div></div>
-  <div class="card"><div class="ch"><div class="dot" style="background:var(--lm)"></div>Caméras & suivi — Lumens</div><div class="cb" id="bomlm"></div></div>
-  <div class="card"><div class="ch"><div class="dot" style="background:var(--rk)"></div>Sonorisation — Renkus-Heinz × LEA Professional</div><div class="cb" id="bomau"></div></div>
+  <div class="card"><div class="ch"><div class="dot" style="background:var(--tv)"></div>Syst&egrave;me de conf&eacute;rence &mdash; Televic</div><div class="cb" id="bomtv"></div></div>
+  <div class="card"><div class="ch"><div class="dot" style="background:var(--lm)"></div>Cam&eacute;ras &amp; suivi &mdash; Lumens</div><div class="cb" id="bomlm"></div></div>
+  <div class="card"><div class="ch"><div class="dot" style="background:var(--rk)"></div>Sonorisation &mdash; Renkus-Heinz &times; LEA Professional</div><div class="cb" id="bomau"></div></div>
   <div class="grand">
-    <span style="color:#9EB8D0;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em">Total général HT</span>
-    <span style="color:var(--g);font-size:20px;font-weight:700" id="gtot">—</span>
+    <span style="color:#9EB8D0;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em">Total g&eacute;n&eacute;ral HT</span>
+    <span style="color:var(--g);font-size:20px;font-weight:700" id="gtot">-</span>
   </div>
   <div class="acts">
-    <button class="ab p" onclick="window.print()">Imprimer / PDF</button>
-    <button class="ab" onclick="copySum()">Copier résumé</button>
-    <button class="ab" onclick="saveConf()">Sauvegarder</button>
-    <button class="ab" onclick="loadConf()">Charger</button>
-    <button class="ab" onclick="sendMail()">Mail TCF</button>
-    <button class="ab" onclick="toggleSum()">Résumé texte</button>
+    <button class="ab p" id="btn-print">Imprimer / PDF</button>
+    <button class="ab" id="btn-copy">Copier r&eacute;sum&eacute;</button>
+    <button class="ab" id="btn-save">Sauvegarder</button>
+    <button class="ab" id="btn-load">Charger</button>
+    <button class="ab" id="btn-mail">Mail TCF</button>
+    <button class="ab" id="btn-sum">R&eacute;sum&eacute; texte</button>
   </div>
   <div class="spanel hid" id="spanel">
     <div style="display:flex;align-items:center;justify-content:space-between">
-      <span style="font-weight:700;font-size:13px">Résumé de configuration</span>
-      <button class="ab" style="padding:4px 10px;font-size:11px" onclick="copySum()">Copier</button>
+      <span style="font-weight:700;font-size:13px">R&eacute;sum&eacute; de configuration</span>
+      <button class="ab" id="btn-copy2" style="padding:4px 10px;font-size:11px">Copier</button>
     </div>
     <pre id="sumtxt"></pre>
   </div>
-  <p style="font-size:10px;color:var(--mt);text-align:center;margin-top:10px;font-style:italic">* Prix publics HT — VC-TR40 base VC-TR41 — UBX-16/CS704 : vérifier compatibilité puissance — Devis : info-tcf@televic.com · 03 74 09 52 76</p>
+  <p style="font-size:10px;color:var(--mt);text-align:center;margin-top:10px;font-style:italic">* Prix publics HT &mdash; UniCOS et Plixus MME : sur projet Televic &mdash; Licences : sur devis &mdash; info-tcf@televic.com &middot; 03 74 09 52 76</p>
 </div>
 </div>
-
 <script>
-const P={
-  // Televic
+(function(){
+'use strict';
+var P={
   AE:1800,CSL:365,DSL:300,MIC:165,
   WAP:3685,WAPPS:115,CHTG4:1415,CHT10:1600,
   GO:1155,FLEXG4:1440,PLM:215,
   PLIXUS:3890,CFLEX:900,
-  // Lumens
   CC:1549,R31:1299,TR40:1699,TR61:2599,
-  // LEA (HT std / avec Dante)
-  CS34:890,CS34D:1130,
-  CS124:1210,CS124D:1450,
-  CS164:1810,CS164D:2530,
-  CS354:2010,CS354D:2740,
-  CS704:2610,CS704D:3370,
-  // Renkus passif
-  CX41:295,SUP41:50,CX61:490,SUP61:50,
+  CX41:295,S41:50,CX61:655,S61:80,
   UBX4:980,UBX8:980,UBX16:1350,
-  // Renkus actif ICC (prix avec Dante natif)
-  ICC12:6370,ICC24:11705,
+  CA61:2990,SA61:80,
+  IC8:9090,IC16:16665,ICLX:9985,
+  CS34:890,CS34D:1130,CS124:1210,CS124D:1450,
+  CS164:1810,CS164D:2530,CS354:2010,CS354D:2740,CS704:2610,CS704D:3370,
+  CX112S:1070,CX118S:1355
 };
-// Wattage specs
-const SPKW={
-  CX41:{pgm:50,nom:25,ohm:8},CX61:{pgm:120,nom:60,ohm:8},
-  UBX4:{pgm:110,nom:55,ohm:12},UBX8:{pgm:220,nom:110,ohm:8},UBX16:{pgm:450,nom:225,ohm:4},
+var UCO={
+  core:{name:'UniCOS Core T',short:'Core T',ref:'UNICOS-CORE-T',desc:'Ecran tactile, symboles universels, micro integre'},
+  pro:{name:'UniCOS Pro',short:'Pro',ref:'UNICOS-PRO',desc:'Camera integree, ecran HD, moderation avancee'},
+  mm10:{name:'UniCOS T/MM10',short:'T/MM10',ref:'UNICOS-T-MM10',desc:'Multimedia tout-en-un, ecran 10", plateforme distante'},
+  mm7:{name:'UniCOS F/MM7',short:'F/MM7',ref:'UNICOS-F-MM7',desc:'Encastrable, ecran 7", compatible Lingua ID-MM'}
 };
-const AMPW={CS34:30,CS124:120,CS164:160,CS354:350,CS704:700};
-const URLS={
+var BC={tv:'#78BE20',lm:'#0066B3',lea:'#1A1A1A',rk:'#1C3A6B',uc:'#6B3FA0'};
+var BL={tv:'Televic',lm:'Lumens',lea:'LEA',rk:'Renkus-Heinz',uc:'UniCOS'};
+var URLS={
   'D-CERNO AE':'https://www.televic-conference.fr/produit/d-cerno-ae/',
   'D-CERNO C SL':'https://www.televic-conference.fr/produit/d-cerno-c-sl/',
   'D-CERNO D SL':'https://www.televic-conference.fr/produit/d-cerno-d-sl/',
@@ -363,375 +378,414 @@ const URLS={
   'VC-R31':'https://www.televic-conference.fr/produit/vc-r31/',
   'VC-TR40':'https://www.televic-conference.fr/produit/vc-tr40/',
   'VC-TR61':'https://www.televic-conference.fr/produit/vc-tr61/',
-  'CX41':'https://www.televic-conference.fr/produit/cx41/',
-  'CX61':'https://www.televic-conference.fr/produit/cx61/',
   'UBX-4':'https://www.televic-conference.fr/produit/ubx-4/',
   'UBX-8':'https://www.televic-conference.fr/produit/ubx-8/',
   'UBX-16':'https://www.televic-conference.fr/produit/ubx-16/',
-  'ICC12/3-RD':'https://www.televic-conference.fr/produit/icc12-3/',
-  'ICC24/3-RD':'https://www.televic-conference.fr/produit/icc24-3/',
-  'CS34':'https://www.televic-conference.fr/produit/connect-series-cs34/',
-  'CS124':'https://www.televic-conference.fr/produit/connect-series-cs124/',
-  'CS164':'https://www.televic-conference.fr/produit/connect-series-cs164/',
-  'CS354':'https://www.televic-conference.fr/produit/connect-series-cs354/',
-  'CS704':'https://www.televic-conference.fr/produit/connect-series-cs704/',
+  'CX41':'https://www.televic-conference.fr/produit/cx41/',
+  'CX61':'https://www.televic-conference.fr/produit/cx61/'
 };
-const BC={tv:'#78BE20',lm:'#0066B3',lea:'#1A1A1A',rk:'#1C3A6B',uc:'#7C5C8A'};
-const BL={tv:'Televic',lm:'Lumens',lea:'LEA',rk:'Renkus-Heinz',uc:'UniCOS'};
 
-let camXtra=0, spkXtra=0;
-let S={budget:true,sys:'dcerno',evol:false,camPrem:false,unicos:false,atype:'passive',acol:'point',dante:false,surf:60};
+var camXtra=0,spkXtra=0;
+var S={
+  budget:true,
+  sys:'dcerno',evol:false,camPrem:false,
+  ucoKey:'core',ucoPres:'',ucoPresN:1,
+  lic:{vote:false,id:false,c360:false,decide:false},
+  abudget:'eco',ausage:'voice',surface:'flat',dante:false,surf:60,
+  spkType:'auto',caisson:false
+};
 
-const fmt=n=>n.toLocaleString('fr-FR',{minimumFractionDigits:2})+' €';
-const $=id=>document.getElementById(id);
-const hid=id=>$(id).classList.add('hid');
-const shw=id=>$(id).classList.remove('hid');
+function fmt(n){return n.toLocaleString('fr-FR',{minimumFractionDigits:2})+' \u20AC';}
+function g(id){return document.getElementById(id);}
+function h(id){var el=g(id);if(el)el.classList.add('hid');}
+function sv(id){var el=g(id);if(el)el.classList.remove('hid');}
+function ton(id,cls,v){var el=g(id);if(el)el.classList.toggle(cls,v);}
+function isUco(){return S.sys.indexOf('uco-')===0;}
+function ucoKey(){return S.sys.replace('uco-','');}
 
-function setMode(m){
-  const e=m==='edit';
-  e?$('sidebar').classList.remove('hid'):$('sidebar').classList.add('hid');
-  $('mb-edit').classList.toggle('on',e);
-  $('mb-read').classList.toggle('on',!e);
-}
-
-function setBudget(v){
-  S.budget=v;
-  $('bb-y').classList.toggle('on',v);
-  $('bb-n').classList.toggle('on',!v);
-  $('bnote').textContent=v?'Options évolutives, premium et UniCOS disponibles':'Configuration de base';
-  if(!v){S.evol=false;S.camPrem=false;S.atype='passive';S.acol='point';S.dante=false;S.unicos=false;}
-  update();
-}
-
-function setSys(s){
-  S.sys=s;
-  if(s==='go')S.evol=false;
-  document.querySelectorAll('.so').forEach(b=>b.classList.toggle('on',b.dataset.s===s));
-  // UniCOS only available with Plixus
-  if(s!=='plixus')S.unicos=false;
-  update();
-}
-
-function setEvol(v){
-  if(!S.budget&&v)return;
-  S.evol=v;
-  $('tb-disc').classList.toggle('on',!v);
-  $('tb-deci').classList.toggle('on',v);
-  update();
-}
-
-function setUniCOS(v){
-  if(!S.budget)return;
-  S.unicos=v;
-  $('tb-uco-n').classList.toggle('on',v===false);
-  $('tb-uco-c').classList.toggle('on',v==='core');
-  $('tb-uco-p').classList.toggle('on',v==='pro');
-  update();
-}
-
-function setCamP(v){
-  if(!S.budget&&v)return;
-  S.camPrem=v;
-  $('tb-cstd').classList.toggle('on',!v);
-  $('tb-cprem').classList.toggle('on',v);
-  update();
-}
-
-function setAT(v){
-  if(!S.budget&&v==='active')return;
-  S.atype=v;
-  $('tb-pass').classList.toggle('on',v==='passive');
-  $('tb-act').classList.toggle('on',v==='active');
-  update();
-}
-
-function setAC(v){
-  if(!S.budget&&v==='column')return;
-  S.acol=v;
-  $('tb-pt').classList.toggle('on',v==='point');
-  $('tb-col').classList.toggle('on',v==='column');
-  update();
-}
-
-function cdelta(d){camXtra=Math.max(-8,Math.min(10,camXtra+d));update();}
-function spkdelta(d){spkXtra=Math.max(-4,Math.min(8,spkXtra+d));update();}
-
-function dimsChg(){
-  const x=parseFloat($('rx').value)||0,y=parseFloat($('ry').value)||0;
-  if(x>0&&y>0){const s=Math.round(x*y);$('sls').value=Math.min(200,Math.max(20,s));$('dnote').textContent='= '+s+' m²';}
-  update();
-}
-
-function snapS(v){$('sls').value=v;$('rx').value='';$('ry').value='';$('dnote').textContent='';update();}
+function pill(b){return '<span class="bp" style="background:'+BC[b]+'">'+BL[b]+'</span>';}
+function lnk(k){var u=URLS[k];return u?'<a class="pl" href="'+u+'" target="_blank">fiche</a>':'';}
+function row(b,ref,qty,prix,uk){return '<div class="brow">'+pill(b)+'<div class="bref">'+ref+(uk?lnk(uk):'')+'</div><div class="bq">\u00d7'+qty+'</div><div class="bu">'+fmt(prix)+'</div><div class="bt" style="color:var(--navy)">'+fmt(qty*prix)+'</div></div>';}
+function rowD(b,ref,tag){return '<div class="brow" style="grid-template-columns:auto 1fr auto">'+pill(b)+'<div class="bref">'+ref+(tag?'<span class="utag">'+tag+'</span>':'')+'</div><div class="bt" style="color:var(--mt);font-size:11px">Sur devis</div></div>';}
+function subrow(lbl,tot,col){return '<div class="bsub" style="background:'+col+'15;border:1px solid '+col+'40"><div></div><div class="bref" style="color:'+col+';font-weight:700;font-size:12px">'+lbl+'</div><div></div><div></div><div class="bt" style="color:'+col+';font-size:13px">'+(tot>0?fmt(tot):'Sur devis/projet')+'</div></div>';}
 
 function camAuto(p){if(p<10)return 2;if(p<20)return 3;if(p<30)return 4;if(p<40)return 5;if(p<60)return 6;return 8;}
+function catOf(p){return p<25?'petit':p<=45?'moyen':'grand';}
+function catLbl(c){return{petit:'Petite salle',moyen:'Moyenne salle',grand:'Grande salle'}[c]||'';}
 
-// ── Audio auto-selection ─────────────────────────────────────
-function audioConfig(surf,atype,acol,dante,nSpkOverride){
-  // Returns {label, rows[], total, spkModel, ampModel, nAuto, note}
-  let spkM='',ampM='',nAuto=2,rows=[],total=0,note='',label='';
+// ── Audio config ─────────────────────────────────────────────
+function audioConfig(c,budget,usage,surface,spkType,nOvr,dante){
+  var sm='',sp=0,sq=0,ssup=0,am='',ap=0,aw=0,active=false,note='',sub='',bref=null;
+  // spkType : 'auto','point','col'
+  var forcePoint=(spkType==='point');
+  var forceCol=(spkType==='col');
 
-  if(atype==='active'){
-    // ICONYX Compact ICC — Dante natif
-    if(surf<=120){spkM='ICC12/3-RD';nAuto=2;const u=P.ICC12;rows=[{b:'rk',ref:'ICC12/3-RD — Colonne active 12×3", Dante intégré, contrôle RHAON',qty:2,prix:u,uk:'ICC12/3-RD'}];}
-    else{spkM='ICC24/3-RD';nAuto=2;const u=P.ICC24;rows=[{b:'rk',ref:'ICC24/3-RD — Colonne active 24×3", Dante intégré, contrôle RHAON',qty:2,prix:u,uk:'ICC24/3-RD'}];}
-    const nFinal=Math.max(1,nAuto+nSpkOverride);
-    rows[0].qty=nFinal;
-    total=rows[0].prix*nFinal;
-    label=`${nFinal}× ${spkM}`;
-    note='<div class="ib g" style="margin-top:6px">ICONYX Compact : Dante + pilotage DSP RHAON intégré. Pas d\'ampli LEA requis.</div>';
-  } else if(acol==='column'){
-    // Colonnes passives UBX
-    if(surf<=80){spkM='UBX-4';ampM=dante?'CS164 Dante':'CS164';nAuto=2;
-      const u=P.UBX4,a=dante?P.CS164D:P.CS164;
-      rows=[{b:'rk',ref:'UBX-4 — Colonne passive 4HP, 110W PGM, portée 15m, IP64',qty:2,prix:u,uk:'UBX-4'},{b:'lea',ref:`CS164 — 4×160W${dante?', +Dante':''}`,qty:1,prix:a,uk:'CS164'}];
-    } else if(surf<=120){spkM='UBX-8';ampM=dante?'CS354 Dante':'CS354';nAuto=2;
-      const u=P.UBX8,a=dante?P.CS354D:P.CS354;
-      rows=[{b:'rk',ref:'UBX-8 — Colonne passive 8HP, 220W PGM, portée 30m, IP64',qty:2,prix:u,uk:'UBX-8'},{b:'lea',ref:`CS354 — 4×350W${dante?', +Dante':''}`,qty:1,prix:a,uk:'CS354'}];
-    } else if(surf<=160){spkM='UBX-16';ampM=dante?'CS704 Dante':'CS704';nAuto=2;
-      const u=P.UBX16,a=dante?P.CS704D:P.CS704;
-      rows=[{b:'rk',ref:'UBX-16 — Colonne passive 16HP, 450W PGM, portée 45m, IP64',qty:2,prix:u,uk:'UBX-16'},{b:'lea',ref:`CS704 — 4×700W${dante?', +Dante':''}`,qty:1,prix:a,uk:'CS704'}];
-    } else {spkM='UBX-16';ampM=dante?'CS704 Dante':'CS704';nAuto=4;
-      const u=P.UBX16,a=dante?P.CS704D:P.CS704;
-      rows=[{b:'rk',ref:'UBX-16 — Colonne passive 16HP, 450W PGM, portée 45m, IP64',qty:4,prix:u,uk:'UBX-16'},{b:'lea',ref:`CS704 — 4×700W${dante?', +Dante':''}`,qty:1,prix:a,uk:'CS704'}];
-    }
-    const nFinal=Math.max(1,nAuto+nSpkOverride);
-    rows[0].qty=nFinal;
-    total=rows.reduce((s,r)=>s+r.qty*r.prix,0);
-    label=`${nFinal}× ${spkM} + ${ampM}`;
-    if(surf>160)note='<div class="ib a" style="margin-top:6px">Salle > 160m² : caisson CX118-S en option. Étude acoustique recommandée.</div>';
-    if(dante&&surf<=80)note+='<div class="ib b" style="margin-top:6px">Dante CS164 : surcoût vs standard + 720€.</div>';
-    if(dante&&surf<=120)note+='<div class="ib b" style="margin-top:6px">Dante CS354 : surcoût + 730€.</div>';
-  } else {
-    // Point source
-    if(surf<=60){spkM='CX41';ampM='CS34';nAuto=4;
-      const u=P.CX41,s4=P.SUP41,a=P.CS34;
-      rows=[{b:'rk',ref:'CX41 — Enceinte coaxiale 4", 50W PGM, 109dB @1m',qty:4,prix:u,uk:'CX41'},{b:'rk',ref:'UBRKT/CF41B — Support mural/plafond',qty:4,prix:s4,uk:null},{b:'lea',ref:'CS34 — 4×30W',qty:1,prix:a,uk:'CS34'}];
-      note='<div class="ib a" style="margin-top:6px">CS34 : Dante non disponible sur ce modèle.</div>';
-    } else if(surf<=80){spkM='CX61';ampM=dante?'CS124 Dante':'CS124';nAuto=2;
-      const u=P.CX61,s6=P.SUP61,a=dante?P.CS124D:P.CS124;
-      rows=[{b:'rk',ref:'CX61 — Enceinte 6.5", 120W PGM, 120dB @1m',qty:2,prix:u,uk:'CX61'},{b:'rk',ref:'Support CX61',qty:2,prix:s6,uk:null},{b:'lea',ref:`CS124 — 4×120W${dante?', +Dante':''}`,qty:1,prix:a,uk:'CS124'}];
-      if(dante)note='<div class="ib b" style="margin-top:6px">Dante CS124 : surcoût + 240€.</div>';
+  if(budget==='eco'){
+    if(forcePoint){
+      // Point source eco : CX41 toutes tailles
+      sm='CX41';sp=P.CX41;sq=(c==='petit'?4:c==='moyen'?6:8);ssup=P.S41;am='CS34';ap=dante?P.CS34D:P.CS34;aw=30;bref=2270;
+      if(dante)note='<div class="ib a" style="margin-top:6px">CS34 : Dante non disponible. CS124D recommande a la place.</div>';
     } else {
-      label='Colonnes UBX recommandées pour >80m²';
-      note='<div class="ib r" style="margin-top:6px">Surface > 80m² : enceintes CX point source insuffisantes. Activer budget + Colonne UBX.</div>';
-      return{label,rows:[],total:0,spkM:'',ampM:'',nAuto:0,note};
+      // Colonne = default eco
+      if(c==='petit'){sm='CX41';sp=P.CX41;sq=4;ssup=P.S41;am='CS34';ap=dante?P.CS34D:P.CS34;aw=30;bref=2270;}
+      else if(c==='moyen'){sm='UBX-8';sp=P.UBX8;sq=2;am='CS354';ap=dante?P.CS354D:P.CS354;aw=350;bref=4710;}
+      else{sm='UBX-16';sp=P.UBX16;sq=2;am='CS704';ap=dante?P.CS704D:P.CS704;aw=700;}
+      if(c==='petit'&&dante)note='<div class="ib a" style="margin-top:6px">CS34 : Dante non disponible sur ce modele.</div>';
     }
-    const nFinal=Math.max(1,nAuto+nSpkOverride);
-    // Adjust speaker qty (not supports, not amp)
-    rows[0].qty=nFinal;
-    if(rows[1]&&rows[1].ref.includes('Support'))rows[1].qty=nFinal;
-    total=rows.reduce((s,r)=>s+r.qty*r.prix,0);
-    label=`${nFinal}× ${spkM} + ${ampM}`;
+  } else if(budget==='std'){
+    if(forcePoint){
+      // Point source std : CX61
+      sm='CX61';sp=P.CX61;sq=(c==='petit'?2:c==='moyen'?4:6);ssup=P.S61;
+      am=(c==='petit'?'CS124':c==='moyen'?'CS354':'CS704');
+      ap=(c==='petit'?(dante?P.CS124D:P.CS124):c==='moyen'?(dante?P.CS354D:P.CS354):(dante?P.CS704D:P.CS704));
+      aw=(c==='petit'?120:c==='moyen'?350:700);
+    } else {
+      // Colonne std
+      if(c==='petit'){sm='UBX-4';sp=P.UBX4;sq=2;am='CS164';ap=dante?P.CS164D:P.CS164;aw=160;bref=3770;}
+      else if(c==='moyen'){sm='UBX-8';sp=P.UBX8;sq=2;am='CS354';ap=dante?P.CS354D:P.CS354;aw=350;bref=4710;}
+      else{sm='UBX-16';sp=P.UBX16;sq=2;am='CS704';ap=dante?P.CS704D:P.CS704;aw=700;}
+      if(surface==='slope')note='<div class="ib b" style="margin-top:6px">Surface en pente : passif avec rappel. Etude acoustique conseillee.</div>';
+      if(usage==='media')sub='<div class="opt-row">Option caisson de basse disponible ci-dessous.</div>';
+    }
+  } else {
+    active=true;
+    if(forcePoint){
+      // Point source premium : CA61-RD
+      sm='CA61-RD';sp=P.CA61;sq=(c==='petit'?2:c==='moyen'?4:6);ssup=P.SA61;
+      note='<div class="ib g" style="margin-top:6px">CA61-RD : active self-powered, RHAON+Dante, ampli SA625-RD inclus.</div>';
+    } else {
+      // Colonne premium
+      if(c==='petit'){sm='CA61-RD';sp=P.CA61;sq=2;ssup=P.SA61;note='<div class="ib g" style="margin-top:6px">CA61-RD : active self-powered, RHAON+Dante.</div>';}
+      else if(c==='moyen'){sm='IC8-RD';sp=P.IC8;sq=2;note='<div class="ib g" style="margin-top:6px">IC8-RD : ICONYX Gen5 active, Dante+RHAON.</div>';}
+      else if(usage==='media'){sm='ICLX-RD';sp=P.ICLX;sq=2;note='<div class="ib p" style="margin-top:6px">ICLive X : grande salle voix+media, RHAON+Dante.</div>';sub='<div class="opt-row">Caisson ICLX-118S recommande pour les basses.</div>';}
+      else{sm='IC16-RD';sp=P.IC16;sq=2;note='<div class="ib g" style="margin-top:6px">IC16-RD : grande salle voix, Dante, directivite 10-20\u00b0.</div>';}
+    }
+    if(surface==='slope')note+='<div class="ib b" style="margin-top:6px">En pente : DSP RHAON ideal pour gradins.</div>';
   }
-  return{label,rows,total,spkM,ampM,nAuto,note};
+  var nA=sq,nF=Math.max(1,nA+nOvr),tot=(nF*sp)+(nF*(ssup||0))+ap;
+  var lbl=nF+'x '+sm+(am?' + '+am+(dante&&!active?' Dante':''):'');
+  // Caisson disponible ? passif + pas eco CX41 + (UBX-4→CS164 ou UBX-8→CS354 ou UBX-16→CS704)
+  var subModel='';
+  var subPx=0;
+  if(!active&&sm!=='CX41'){
+    if(sm==='UBX-4'||sm==='CX61'){subModel='CX112-S';subPx=P.CX112S;}
+    else if(sm==='UBX-8'||sm==='UBX-16'){subModel='CX118-S';subPx=P.CX118S;}
+  }
+  return{sm:sm,sp:sp,nA:nA,nF:nF,active:active,am:am,ap:ap,aw:aw,ssup:ssup||0,tot:tot,lbl:lbl,note:note,sub:sub,bref:bref,subModel:subModel,subPx:subPx};
 }
 
-function wbox(spkM,nSpk,ampM){
-  const k=spkM.replace('-','').replace('/','');
-  const sp=SPKW[k]||SPKW[spkM];
-  const aw=AMPW[ampM.replace(' Dante','')];
-  if(!sp||!aw)return'';
-  const hr=Math.round((aw-sp.nom)/sp.nom*100);
-  const ok=aw>=sp.nom;
-  return`<div class="wbox"><h4>Calcul de puissance</h4>
-    <div class="wr"><span class="wl">${spkM} × ${nSpk}</span><span class="wv">${sp.pgm}W PGM · ${sp.nom}W nominal · ${sp.ohm}Ω</span></div>
-    <div class="wr"><span class="wl">Charge totale</span><span class="wv">${nSpk*sp.pgm}W PGM</span></div>
-    <div class="wr"><span class="wl">${ampM} / canal</span><span class="wv">${aw}W</span></div>
-    <div class="wr"><span class="wl">Marge</span><span class="${ok?'wok':'wno'}">${ok?'+'+hr+'% ✓':'Insuffisant ✗'}</span></div>
-  </div>`;
+function drawRoom(rx,ry,nCams,sm,nSpk,isAct,slope){
+  var W=360,H=slope?215:200,mg=32;
+  var eRx=rx>0?rx:Math.max(4,Math.sqrt(S.surf*1.4));
+  var eRy=ry>0?ry:Math.max(3,Math.sqrt(S.surf/1.4));
+  var sc=Math.min((W-2*mg)/eRx,(H-2*mg)/eRy);
+  var rW=eRx*sc,rH=eRy*sc,rX=(W-rW)/2,rY=(H-rH)/2;
+  var e=[];
+  if(slope){
+    e.push('<polygon points="'+rX+','+(rY+rH)+' '+(rX+rW)+','+(rY+rH)+' '+(rX+rW*.85)+','+rY+' '+(rX+rW*.15)+','+rY+'" fill="#78BE2010" stroke="#1A2E45" stroke-width="2"/>');
+    e.push('<text x="'+(rX+rW/2)+'" y="'+(rY-6)+'" text-anchor="middle" font-size="8" fill="#94A3B8" font-family="Arial">AVANT/SCENE</text>');
+  } else {
+    e.push('<rect x="'+(rX+1)+'" y="'+(rY+1)+'" width="'+(rW-2)+'" height="'+(rH-2)+'" fill="#78BE2010" rx="2"/>');
+    e.push('<rect x="'+rX+'" y="'+rY+'" width="'+rW+'" height="'+rH+'" fill="none" stroke="#1A2E45" stroke-width="2" rx="3"/>');
+    e.push('<text x="'+(rX+rW/2)+'" y="'+(rY-6)+'" text-anchor="middle" font-size="8" fill="#94A3B8" font-family="Arial">AVANT</text>');
+  }
+  for(var i=0;i<nCams;i++){var cx=rX+rW*(i+1)/(nCams+1);e.push('<polygon points="'+cx+','+(rY-10)+' '+(cx-6)+','+(rY+3)+' '+(cx+6)+','+(rY+3)+'" fill="#0066B3" opacity=".9"/>');}
+  var col=isAct?'#78BE20':'#1C3A6B';
+  var isCol=sm&&(sm.indexOf('UBX')>=0||sm.indexOf('IC')>=0||sm.indexOf('ICLX')>=0);
+  var pos=nSpk<=2?[[rX,rY+rH*.32],[rX+rW,rY+rH*.32]]:[[rX,rY+rH*.22],[rX+rW,rY+rH*.22],[rX,rY+rH*.72],[rX+rW,rY+rH*.72]];
+  for(var j=0;j<Math.min(nSpk,pos.length);j++){
+    var x=pos[j][0],y=pos[j][1];
+    if(isCol)e.push('<rect x="'+(x-5)+'" y="'+(y-16)+'" width="10" height="32" fill="'+col+'" rx="2" opacity=".85"/>');
+    else e.push('<circle cx="'+x+'" cy="'+y+'" r="8" fill="'+col+'" opacity=".85"/>');
+  }
+  var lx=rx>0?rx:Math.round(eRx),ly=ry>0?ry:Math.round(eRy);
+  e.push('<line x1="'+rX+'" y1="'+(rY+rH+12)+'" x2="'+(rX+rW)+'" y2="'+(rY+rH+12)+'" stroke="#64748B" stroke-width="1"/>');
+  e.push('<text x="'+(rX+rW/2)+'" y="'+(rY+rH+23)+'" text-anchor="middle" font-size="10" fill="#1A2E45" font-weight="bold" font-family="Arial">'+lx+' m</text>');
+  e.push('<line x1="'+(rX-14)+'" y1="'+rY+'" x2="'+(rX-14)+'" y2="'+(rY+rH)+'" stroke="#64748B" stroke-width="1"/>');
+  e.push('<text x="'+(rX-10)+'" y="'+(rY+rH/2)+'" text-anchor="middle" font-size="10" fill="#1A2E45" font-weight="bold" font-family="Arial" transform="rotate(-90,'+(rX-10)+','+(rY+rH/2)+')">'+ly+' m</text>');
+  return '<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;max-height:'+H+'px;display:block">'+e.join('')+'</svg>';
 }
-
-function drawRoom(rx,ry,nCams,spkM,nSpk,atype){
-  const W=360,H=200,mg=32;
-  const eRx=rx>0?rx:Math.max(4,Math.sqrt(S.surf*1.4));
-  const eRy=ry>0?ry:Math.max(3,Math.sqrt(S.surf/1.4));
-  const sc=Math.min((W-2*mg)/eRx,(H-2*mg)/eRy);
-  const rW=eRx*sc,rH=eRy*sc,rX=(W-rW)/2,rY=(H-rH)/2;
-  const e=[];
-  e.push(`<rect x="${rX+1}" y="${rY+1}" width="${rW-2}" height="${rH-2}" fill="#78BE2010" rx="2"/>`);
-  e.push(`<rect x="${rX}" y="${rY}" width="${rW}" height="${rH}" fill="none" stroke="#1A2E45" stroke-width="2" rx="3"/>`);
-  e.push(`<text x="${rX+rW/2}" y="${rY-6}" text-anchor="middle" font-size="8" fill="#94A3B8" font-family="Arial">AVANT</text>`);
-  for(let i=0;i<nCams;i++){const cx=rX+rW*(i+1)/(nCams+1);e.push(`<polygon points="${cx},${rY-10} ${cx-6},${rY+3} ${cx+6},${rY+3}" fill="#0066B3" opacity=".9"/>`);}
-  const isAct=atype==='active';const isCol=(spkM==='UBX-4'||spkM==='UBX-8'||spkM==='UBX-16');
-  const col=isAct?'#78BE20':'#1C3A6B';
-  const spkPositions=nSpk<=2?[[rX,rY+rH*.32],[rX+rW,rY+rH*.32]]:[[rX,rY+rH*.22],[rX+rW,rY+rH*.22],[rX,rY+rH*.72],[rX+rW,rY+rH*.72]];
-  spkPositions.slice(0,nSpk).forEach(([x,y])=>{
-    if(isCol||isAct)e.push(`<rect x="${x-5}" y="${y-16}" width="10" height="32" fill="${col}" rx="2" opacity=".85"/>`);
-    else e.push(`<circle cx="${x}" cy="${y}" r="8" fill="${col}" opacity=".85"/>`);
-  });
-  const lx=rx>0?rx:Math.round(eRx),ly=ry>0?ry:Math.round(eRy);
-  e.push(`<line x1="${rX}" y1="${rY+rH+12}" x2="${rX+rW}" y2="${rY+rH+12}" stroke="#64748B" stroke-width="1"/>`);
-  e.push(`<text x="${rX+rW/2}" y="${rY+rH+23}" text-anchor="middle" font-size="10" fill="#1A2E45" font-weight="bold" font-family="Arial">${lx} m</text>`);
-  e.push(`<line x1="${rX-14}" y1="${rY}" x2="${rX-14}" y2="${rY+rH}" stroke="#64748B" stroke-width="1"/>`);
-  e.push(`<text x="${rX-10}" y="${rY+rH/2}" text-anchor="middle" font-size="10" fill="#1A2E45" font-weight="bold" font-family="Arial" transform="rotate(-90,${rX-10},${rY+rH/2})">${ly} m</text>`);
-  return`<svg viewBox="0 0 ${W} ${H}" style="width:100%;max-height:200px;display:block">${e.join('')}</svg>`;
-}
-
-function pill(b){return`<span class="bp" style="background:${BC[b]||'#64748B'}">${BL[b]||b}</span>`;}
-function lnk(k){const u=URLS[k];return u?`<a class="pl" href="${u}" target="_blank">↗</a>`:'';}
-function row(b,ref,qty,prix,uk){
-  return`<div class="brow">${pill(b)}<div class="bref">${ref}${uk?lnk(uk):''}</div><div class="bq">×${qty}</div><div class="bu">${fmt(prix)}</div><div class="bt" style="color:var(--navy)">${fmt(qty*prix)}</div></div>`;
-}
-function rowD(b,ref,uk){return`<div class="brow" style="grid-template-columns:auto 1fr auto">${pill(b)}<div class="bref">${ref}${uk?lnk(uk):''}</div><div class="bt" style="color:var(--mt);font-size:11px">Sur devis</div></div>`;}
-function subrow(lbl,tot,col){return`<div class="bsub" style="background:${col}15;border:1px solid ${col}40"><div></div><div class="bref" style="color:${col};font-weight:700;font-size:12px">${lbl}</div><div></div><div></div><div class="bt" style="color:${col};font-size:13px">${tot>0?fmt(tot):'Sur devis'}</div></div>`;}
 
 function update(){
-  const p=+$('slp').value,surf=+$('sls').value;
-  const rx=parseFloat($('rx').value)||0,ry=parseFloat($('ry').value)||0;
-  const dante=$('cb-dante').checked;
+  var p=parseInt(g('slp').value)||10;
+  var surf=parseInt(g('sls').value)||60;
+  var rx=parseFloat(g('rx').value)||0,ry=parseFloat(g('ry').value)||0;
+  var dante=g('cb-dante').checked;
   S.surf=surf;S.dante=dante;
-  $('lp').textContent=p;$('ls').textContent=surf+' m²';
+  g('lp').textContent=p;g('ls').textContent=surf+' m\u00B2';
 
-  // Budget locks
-  ['tb-act','tb-col','tb-cprem','tb-deci'].forEach(id=>$(id).classList.toggle('lk',!S.budget));
-  $('cb-dante').disabled=!S.budget;
-  if(S.sys==='go')$('tb-deci').classList.add('lk');
+  var c=catOf(p);
+  var catColors={petit:'#78BE20',moyen:'#0066B3',grand:'#7C5C8A'};
+  g('cat-badge-wrap').innerHTML='<span class="cat-badge '+c+'"><span class="cat-dot" style="background:'+catColors[c]+'"></span>'+catLbl(c)+'</span>';
+  g('scat').textContent=catLbl(c).split(' ')[0];
+  g('scat-sub').textContent={petit:'< 25 pers.',moyen:'25-45 pers.',grand:'45+ pers.'}[c];
 
-  // Visibility
-  if(S.sys==='dcerno')shw('ddsec'); else hid('ddsec');
-  // UniCOS available only with Plixus + budget
-  const unicosAvail=S.sys==='plixus'&&S.budget;
-  if(unicosAvail)shw('unicos-sec'); else{hid('unicos-sec');S.unicos=false;}
-  $('colsec').style.display=S.atype==='passive'?'block':'none';
-  const danteOk=S.atype==='passive'&&!(S.acol==='point'&&surf<=60);
-  $('dantesec').style.display=danteOk?'flex':'none';
-  if(!danteOk)$('cb-dante').checked=false;
-  $('cprem-sec').style.display=S.budget?'block':'none';
+  var m2pp=surf/p,coh=g('coher-box');
+  if(m2pp<0.8)coh.innerHTML='<div class="coher bad">Attention : '+surf+'m\u00B2/'+p+' postes = '+m2pp.toFixed(1)+' m\u00B2/pers. Tres serre.</div>';
+  else if(m2pp<1.2)coh.innerHTML='<div class="coher warn">Info : '+m2pp.toFixed(1)+' m\u00B2/pers. Configuration dense.</div>';
+  else coh.innerHTML='';
 
-  // Surface snap
-  ['bs1','bs2','bs3','bs4','bs5'].forEach(id=>$(id).classList.remove('on'));
-  if(surf<=60)$('bs1').classList.add('on');
-  else if(surf<=80)$('bs2').classList.add('on');
-  else if(surf<=120)$('bs3').classList.add('on');
-  else if(surf<=160)$('bs4').classList.add('on');
-  else $('bs5').classList.add('on');
+  var uco=isUco(),k=ucoKey();
+  ton('tb-deci','lk',!S.budget||S.sys==='go');
+  ton('ba-prm','lk',!S.budget);
+  if(g('cprem-sec'))g('cprem-sec').style.display=S.budget?'block':'none';
+
+  // Sections visibilite
+  if(S.sys==='dcerno'){sv('ddsec');h('lic-sec');}
+  else if(S.sys==='flex4'||S.sys==='plixus'){h('ddsec');sv('lic-sec');}
+  else{h('ddsec');h('lic-sec');}
+  // Decide licence checkbox seulement D-CERNO
+  if(S.sys==='dcerno')sv('lic-decide-row'); else h('lic-decide-row');
+  // Licences specifiques
+  if(S.sys==='flex4'){sv('lic-vote-row');sv('lic-id-row');}
+  else if(S.sys==='plixus'){sv('lic-vote-row');sv('lic-id-row');}
+  else{h('lic-vote-row');h('lic-id-row');}
+  if(S.sys==='flex4'||S.sys==='plixus')sv('lic-c360-row'); else h('lic-c360-row');
+
+  var ucoOk=uco&&S.budget;
+  if(ucoOk)sv('uco-mix-sec'); else h('uco-mix-sec');
+
+  // Dante
+  var danteOk=!(S.abudget==='eco'&&c==='petit');
+  if(g('dantesec'))g('dantesec').style.display=danteOk?'flex':'none';
+  if(!danteOk&&g('cb-dante'))g('cb-dante').checked=false;
+
+  // Lic row styles
+  ['decide','vote','id','c360'].forEach(function(k2){
+    var el=g('lic-row-'+k2);var cb=g('cb-'+k2);
+    if(el&&cb)ton('lic-row-'+k2,'checked',cb.checked);
+  });
+
+  // UniCOS pres
+  if(uco){
+    var pn=parseInt(g('sl-pres-n').value)||1;
+    S.ucoPresN=pn;if(g('lbl-pres-n'))g('lbl-pres-n').textContent=pn;
+    ['core','pro','mm10','mm7'].forEach(function(mk){ton('upres-'+mk,'on',mk===S.ucoPres);});
+    var presKey=S.ucoPres;
+    var info=presKey&&UCO[presKey]?'<div class="ib p" style="margin-top:6px">Mix : '+UCO[presKey].name+' x'+pn+' president + '+UCO[k].name+' x'+(p-pn)+' delegues. Sur projet.</div>':'<div class="ib b" style="margin-top:6px">Option : choisir un modele different pour le(s) president(s).</div>';
+    if(g('uco-mix-info'))g('uco-mix-info').innerHTML=info;
+  }
 
   // Cameras
-  const nA=camAuto(p),nT=Math.max(1,nA+camXtra);
-  let cM,cPx;
-  if(p<=10){cM='VC-R31';cPx=P.R31;}
-  else if(p>=20&&S.camPrem){cM='VC-TR61';cPx=P.TR61;}
-  else{cM='VC-TR40';cPx=P.TR40;}
-  $('lcam').textContent=cM;$('lnauto').textContent=nA;$('ctot').textContent=nT;
-  const xtra=nT-nA;
-  $('cxtralbl').textContent=xtra===0?'auto':(xtra>0?`+${xtra}`:xtra);
-  const cRules=['','<10:2','10-19:3','20-29:4','30-39:5','40-59:6','60+:8'];
-  $('crule').textContent=(cRules[nA]||'')+(xtra!==0?' (ajust.)':'');
+  var nA=camAuto(p),nT=Math.max(1,nA+camXtra);
+  var cM,cPx,cDev=false;
+  if(S.camPrem){if(p<20){cM='VC-TR61';cPx=P.TR61;}else{cM='VC-A71P';cPx=0;cDev=true;}}
+  else{if(p<20){cM='VC-R31';cPx=P.R31;}else{cM='VC-TR40';cPx=P.TR40;}}
+  g('lcam').textContent=cM+(cDev?' (devis)':'');
+  g('lnauto').textContent=nA;g('ctot').textContent=nT;
+  var xc=nT-nA;
+  g('cxtralbl').textContent=xc===0?'auto':(xc>0?'+'+xc:''+xc);
+  g('crule').textContent=(['','<10:2','10-19:3','20-29:4','30-39:5','40-59:6','60+:8'][nA]||'')+(xc!==0?' (ajust.)':'');
 
   // Audio
-  const au=audioConfig(surf,S.atype,S.acol,dante,spkXtra);
-  $('laudio').textContent=au.label||'—';
-  $('lnauto-spk').textContent=au.nAuto||0;
-  const nSpkFinal=Math.max(1,(au.nAuto||2)+spkXtra);
-  $('stot').textContent=nSpkFinal;
-  const sxtra=nSpkFinal-(au.nAuto||2);
-  $('sxtralbl').textContent=sxtra===0?'auto':(sxtra>0?`+${sxtra}`:sxtra);
-  $('srule').textContent=au.spkM?' Modèle : '+au.spkM:''+(sxtra!==0?' (ajust.)':'');
+  var au=audioConfig(c,S.abudget,S.ausage,S.surface,S.spkType,spkXtra,dante);
+  g('laudio').textContent=au.lbl||'-';
+  g('lauto-spk').textContent=au.nA;g('stot-spk').textContent=au.nF;
+  var xs=au.nF-au.nA;
+  g('sxtralbl').textContent=xs===0?'auto':(xs>0?'+'+xs:''+xs);
+  g('srule').textContent=au.sm+(xs!==0?' (ajust.)':'');
 
-  // Televic BOM
-  let tvR=[],tvT=0;
-  const add=(b,r,q,px,uk)=>{tvR.push({b,r,q,px,uk});tvT+=q*px;};
-  let short='',sysN='',sysI='',ddI='';
+  // Caisson section visibility
+  if(au.subModel)sv('caisson-sec'); else{h('caisson-sec');S.caisson=false;if(g('cb-caisson'))g('cb-caisson').checked=false;}
+  if(g('caisson-lbl')&&au.subModel)g('caisson-lbl').textContent=au.subModel+' ('+fmt(au.subPx)+')';
+  if(g('cb-caisson'))ton('caisson-row','checked',g('cb-caisson').checked);
+
+  // ── BOM Televic ─────────────────────────────────────────────
+  var tvR=[],tvT=0;
+  function add(b,ref,qty,px,uk){tvR.push({b:b,r:ref,q:qty,px:px,uk:uk});tvT+=qty*px;}
+  var short='',sysN='',sysI='';
 
   if(S.sys==='dcerno'){
     short='D-CERNO AE';sysN='D-CERNO'+(S.evol&&S.budget?' DECIDE':'');
-    add('tv','D-CERNO AE — Centrale de conférence',1,P.AE,'D-CERNO AE');
-    add('tv','D-CERNO C SL — Poste président',1,P.CSL,'D-CERNO C SL');
-    if(p>1)add('tv','D-CERNO D SL — Postes délégués',p-1,P.DSL,'D-CERNO D SL');
-    add('tv','D-MIC40 SL — Col de cygne',p,P.MIC,null);
-    if(S.evol&&S.budget){ddI=rowD('tv','Logiciel D-CERNO DECIDE — Licence vote électronique',null)+'<div class="ib g" style="margin-top:6px">Même matériel D-CERNO. Licence DECIDE sur devis selon nb de délégués.</div>';}
-    else{ddI=`<div class="ib a" style="margin-top:6px">DISCUSS : gestion de parole.${S.budget?' Passer en DECIDE pour vote (licence sur devis).':''}</div>`;}
-    $('ddinfo').innerHTML=ddI;
+    add('tv','D-CERNO AE \u2014 Centrale de conference',1,P.AE,'D-CERNO AE');
+    add('tv','D-CERNO C SL \u2014 Poste president',1,P.CSL,'D-CERNO C SL');
+    if(p>1)add('tv','D-CERNO D SL \u2014 Postes delegues',p-1,P.DSL,'D-CERNO D SL');
+    add('tv','D-MIC40 SL \u2014 Col de cygne',p,P.MIC,null);
+    // Licences D-CERNO
+    if(g('cb-decide')&&g('cb-decide').checked){
+      tvR.push({b:'tv',r:'Logiciel D-CERNO DECIDE \u2014 Licence vote + identification electronique',dev:true});
+    }
+    var ddI=S.evol&&S.budget?'<div class="ib g" style="margin-top:6px">Mode DECIDE : meme materiel, activation par licence (voir case ci-dessus).</div>':'<div class="ib a" style="margin-top:6px">DISCUSS : gestion de parole.'+(S.budget?' Cocher la licence DECIDE ci-dessus pour le vote.':'')+'</div>';
+    g('ddinfo').innerHTML=ddI;
   } else if(S.sys==='go'){
     short='Confidea WAP G4';sysN='Confidea GO G4';
-    add('tv','Confidea WAP G4 — Centrale',1,P.WAP,'Confidea WAP G4');add('tv','Confidea WAP PS G4 — Alimentation',1,P.WAPPS,null);
-    add('tv','Confidea GO G4 — Postes discussion',p,P.GO,'Confidea GO G4');add('tv','PLM401F — Col de cygne',p,P.PLM,null);
-    add('tv','Confidea CHT G4 — Chargeur',1,P.CHTG4,'Confidea CHT G4');add('tv','Confidea G4 CHT10 — Valise (10 postes)',Math.ceil(p/10),P.CHT10,null);
-    sysI=`<div class="ib a">GO G4 : discussion uniquement. FLEX G4 pour vote/badge : +${fmt(p*(P.FLEXG4-P.GO))} (${p} postes).</div>`;
+    add('tv','Confidea WAP G4 \u2014 Centrale',1,P.WAP,'Confidea WAP G4');
+    add('tv','Confidea WAP PS G4 \u2014 Alimentation',1,P.WAPPS,null);
+    add('tv','Confidea GO G4 \u2014 Postes discussion',p,P.GO,'Confidea GO G4');
+    add('tv','PLM401F \u2014 Col de cygne',p,P.PLM,null);
+    add('tv','Confidea CHT G4 \u2014 Chargeur',Math.ceil(p/10),P.CHTG4,'Confidea CHT G4');
+    add('tv','CHT10 \u2014 Valise transport (10 postes)',Math.ceil(p/10),P.CHT10,null);
+    sysI='<div class="ib a">GO G4 : discussion uniquement. FLEX G4 pour vote/badge : +'+fmt(p*(P.FLEXG4-P.GO))+'.</div>';
   } else if(S.sys==='flex4'){
     short='Confidea WAP G4';sysN='Confidea FLEX G4';
-    add('tv','Confidea WAP G4 — Centrale',1,P.WAP,'Confidea WAP G4');add('tv','Confidea WAP PS G4 — Alimentation',1,P.WAPPS,null);
-    add('tv','Confidea FLEX G4 — Postes vote+badge',p,P.FLEXG4,'Confidea FLEX G4');add('tv','PLM401F — Col de cygne',p,P.PLM,null);
-    add('tv','Confidea CHT G4 — Chargeur',1,P.CHTG4,'Confidea CHT G4');add('tv','Confidea G4 CHT10 — Valise',Math.ceil(p/10),P.CHT10,null);
-    sysI=`<div class="ib g">FLEX G4 : vote + badge NFC/BT. vs GO G4 : +${fmt(p*(P.FLEXG4-P.GO))} (${p} postes).</div>`;
-  } else {
-    // Plixus
-    short='Plixus AE-R';sysN='Plixus + FLEX';
-    add('tv','Plixus AE-R — Centrale IP',1,P.PLIXUS,'Plixus AE-R');add('tv','Confidea FLEX — Postes',p,P.CFLEX,'Confidea FLEX');
-    add('tv','PLM401F — Col de cygne',p,P.PLM,null);
-    // UniCOS
-    if(S.unicos){
-      const ucLabel=S.unicos==='core'?'UniCOS Core T — Unité multimédia tout-en-un':'UniCOS Pro — Unité multimédia avancée';
-      tvR.push({b:'uc',r:ucLabel,q:p,px:0,uk:null,devis:true});
-      $('unicos-info').innerHTML=`<div class="ib p" style="margin-top:6px">${S.unicos==='core'?'UniCOS Core T : symboles universels, écran tactile, micro intégré, sans formation requise.':'UniCOS Pro : caméra intégrée, écran HD, modération avancée.'} Tarif sur devis.</div>`;
-    } else {
-      $('unicos-info').innerHTML='';
-    }
-    sysI='<div class="ib g">Architecture IP. Vote + badge NFC/BT natifs. Évolutif.</div>';
+    add('tv','Confidea WAP G4 \u2014 Centrale',1,P.WAP,'Confidea WAP G4');
+    add('tv','Confidea WAP PS G4',1,P.WAPPS,null);
+    add('tv','Confidea FLEX G4 \u2014 Postes vote + badge',p,P.FLEXG4,'Confidea FLEX G4');
+    add('tv','PLM401F \u2014 Col de cygne',p,P.PLM,null);
+    add('tv','Confidea CHT G4 \u2014 Chargeur',Math.ceil(p/10),P.CHTG4,'Confidea CHT G4');
+    add('tv','CHT10 \u2014 Valise transport',Math.ceil(p/10),P.CHT10,null);
+    if(g('cb-vote')&&g('cb-vote').checked)tvR.push({b:'tv',r:'Licence VOTE electronique \u2014 FLEX G4',dev:true});
+    if(g('cb-id')&&g('cb-id').checked)tvR.push({b:'tv',r:'Licence IDENTIFICATION badge NFC \u2014 FLEX G4',dev:true});
+    if(g('cb-c360')&&g('cb-c360').checked)tvR.push({b:'tv',r:'Logiciel Confero 360',dev:true});
+    sysI='<div class="ib g">FLEX G4 : vote + badge NFC/BT. vs GO : +'+fmt(p*(P.FLEXG4-P.GO))+'.</div>';
+  } else if(S.sys==='plixus'){
+    short='Plixus AE-R';sysN='Plixus + Confidea FLEX';
+    add('tv','Plixus AE-R \u2014 Centrale IP',1,P.PLIXUS,'Plixus AE-R');
+    add('tv','Confidea FLEX \u2014 Postes',p,P.CFLEX,'Confidea FLEX');
+    add('tv','PLM401F \u2014 Col de cygne',p,P.PLM,null);
+    if(g('cb-vote')&&g('cb-vote').checked)tvR.push({b:'tv',r:'Licence VOTE electronique \u2014 Plixus',dev:true});
+    if(g('cb-id')&&g('cb-id').checked)tvR.push({b:'tv',r:'Licence IDENTIFICATION NFC \u2014 Plixus',dev:true});
+    if(g('cb-c360')&&g('cb-c360').checked)tvR.push({b:'tv',r:'Logiciel Confero 360',dev:true});
+    sysI='<div class="ib g">Architecture IP. Vote + badge natifs. Evolutif.</div>';
+  } else if(uco){
+    var presN=S.ucoPres?Math.min(S.ucoPresN,p-1):0;
+    var delN=p-presN;
+    short='Plixus MME';sysN='Plixus MME + '+UCO[k].name;
+    // Infrastructure Plixus MME
+    tvR.push({b:'tv',r:'Plixus MME \u2014 Centrale multimedia IP UniCOS',dev:true});
+    tvR.push({b:'tv',r:'Plixus PS \u2014 Alimentation externe Plixus MME',dev:true});
+    tvR.push({b:'tv',r:'V-In / V-Out \u2014 Module video I/O Plixus',dev:true});
+    // Postes delegues
+    if(delN>0)tvR.push({b:'uc',r:UCO[k].name+' \u2014 '+UCO[k].ref+' \u2014 '+UCO[k].desc,dev:true,tag:delN+'\u00d7 delegues'});
+    // Postes president
+    if(presN>0&&S.ucoPres&&UCO[S.ucoPres])tvR.push({b:'uc',r:UCO[S.ucoPres].name+' \u2014 '+UCO[S.ucoPres].ref+' \u2014 President',dev:true,tag:presN+'\u00d7 president'});
+    sysI='<div class="ib p">UniCOS sur Plixus MME. Postes multimedia IP, micro integre, vote et badge natifs. Tout sur projet.</div>';
   }
-  $('sysinfo').innerHTML=sysI;
+  if(g('sysinfo'))g('sysinfo').innerHTML=sysI;
 
-  // Lumens BOM
-  const lmR=[{b:'lm',r:'CAM CONNECT — Logiciel suivi et commutation caméras',q:1,px:P.CC,uk:'CAM CONNECT'},{b:'lm',r:`${cM} — Caméra auto-tracking`,q:nT,px:cPx,uk:cM}];
-  const lmT=P.CC+nT*cPx;
-  let cN='';
-  if(p>=20&&!S.camPrem&&S.budget)cN=`<div class="ib a" style="margin-top:6px">Budget Premium : VC-TR61 dispo. Surcoût : ${fmt(nT*(P.TR61-cPx))} pour ${nT} cams.</div>`;
+  // BOM Lumens
+  var lmR=[{b:'lm',r:'CAM CONNECT \u2014 Logiciel suivi cameras',q:1,px:P.CC,uk:'CAM CONNECT'}];
+  if(cDev)lmR.push({b:'lm',r:cM+' \u2014 Camera PTZ 4K premium',q:nT,dev:true});
+  else lmR.push({b:'lm',r:cM+' \u2014 Camera auto-tracking',q:nT,px:cPx,uk:cM});
+  var lmT=P.CC+(cDev?0:nT*cPx);
+  var cN=cDev?'<div class="ib p" style="margin-top:6px">VC-A71P : tarif sur devis.</div>':(!S.camPrem&&S.budget&&p>=20?'<div class="ib a" style="margin-top:6px">Premium disponible : TR61 (&lt;20p) ou A71P (&ge;20p).</div>':'');
 
-  const grand=tvT+lmT+au.total;
+  // BOM Audio
+  var auH='';
+  if(au.active){
+    auH=row('rk',au.sm+' \u2014 Enceinte active RHAON+Dante',au.nF,au.sp,null);
+    if(au.ssup>0)auH+=row('rk','Support mural',au.nF,au.ssup,null);
+    auH+=subrow('Sous-total audio',au.tot,'#1C3A6B');
+  } else {
+    if(au.sm==='CX41')auH=row('rk','CX41 \u2014 Enceinte coaxiale 4", 50W PGM, 109dB@1m',au.nF,P.CX41,'CX41')+row('rk','UBRKT/CF41B \u2014 Support mural',au.nF,P.S41,null);
+    else if(au.sm==='CX61')auH=row('rk','CX61 \u2014 Enceinte 6.5", 200W PGM, 120dB@1m',au.nF,P.CX61,'CX61')+row('rk','UBRKT/CT61B \u2014 Support',au.nF,P.S61,null);
+    else{var rch={'UBX-4':'15m','UBX-8':'30m','UBX-16':'45m'};auH=row('rk',au.sm+' \u2014 Colonne passive IP64, portee '+(rch[au.sm]||''),au.nF,au.sp,au.sm);}
+    if(au.am)auH+=row('lea',au.am+' \u2014 Amplificateur'+(dante?' Dante':''),1,au.ap,null);
+    if(au.tot>0)auH+=subrow('Sous-total audio',au.tot,'#1C3A6B');
+  }
+  auH+=au.note;if(au.sub)auH+=au.sub;
+  if(au.bref)auH+='<div class="ib b" style="margin-top:6px">Pack officiel Renkus\u00d7LEA 2026 : <strong>a partir de '+fmt(au.bref)+'</strong>.</div>';
+  // Caisson
+  var caissonTot=0;
+  if(au.subModel&&g('cb-caisson')&&g('cb-caisson').checked){
+    auH+=row('rk',au.subModel+' \u2014 Caisson de basse passif',1,au.subPx,null);
+    caissonTot=au.subPx;
+    auH+='<div class="ib b" style="margin-top:4px">Canal Smart Bridge de l\'ampli utilise pour le caisson.</div>';
+  }
+  // Wattage box
+  if(au.am&&!au.active&&au.aw>0){
+    var SPKW={'CX41':{pgm:50,nom:25},'CX61':{pgm:200,nom:100},'UBX-4':{pgm:110,nom:55},'UBX-8':{pgm:220,nom:110},'UBX-16':{pgm:450,nom:225}};
+    var sp2=SPKW[au.sm];
+    if(sp2){var hr=Math.round((au.aw-sp2.nom)/sp2.nom*100),ok2=au.aw>=sp2.nom;
+      auH+='<div class="wbox"><h4>Calcul de puissance</h4><div class="wr"><span class="wl">'+au.sm+' \u00d7'+au.nF+'</span><span class="wv">'+sp2.pgm+'W PGM \u00b7 '+sp2.nom+'W nom.</span></div><div class="wr"><span class="wl">'+au.am+' / canal</span><span class="wv">'+au.aw+'W</span></div><div class="wr"><span class="wl">Marge</span><span class="'+(ok2?'wok':'wno')+'">'+(ok2?'+'+hr+'% \u2713':'Insuffisant \u2717')+'</span></div></div>';}
+  }
 
-  // Render
-  $('bomtv').innerHTML=tvR.map(r=>r.devis?rowD(r.b,r.r,r.uk):row(r.b,r.r,r.q,r.px,r.uk)).join('')+subrow('Sous-total Televic',tvT,'#78BE20');
-  $('bomlm').innerHTML=lmR.map(r=>row(r.b,r.r,r.q,r.px,r.uk)).join('')+subrow('Sous-total Lumens',lmT,'#0066B3')+cN;
-  $('bomau').innerHTML=(au.rows.length?au.rows.map(r=>row(r.b,r.ref||r.r,r.qty||r.q,r.prix||r.px,r.uk)).join(''):'')+
-    (au.total>0?subrow('Sous-total audio',au.total,'#1C3A6B'):'')+au.note+
-    (au.spkM&&au.ampM?wbox(au.spkM,nSpkFinal,au.ampM):'');
+  var grand=tvT+lmT+au.tot+caissonTot;
 
-  // Summary bar
-  const sysNames={dcerno:`D-CERNO${S.evol&&S.budget?' DECIDE':''}`,go:'Confidea GO G4',flex4:'Confidea FLEX G4',plixus:'Plixus FLEX'};
-  $('sp').textContent=p;$('ssys').textContent=sysNames[S.sys]+(S.unicos?' +UniCOS':'');
-  $('snc').textContent=nT;$('scm').textContent=cM;
-  $('ssf').textContent=surf+'m²';$('sau').textContent=au.label||'—';
-  $('stot').textContent=grand>0?fmt(grand).replace(' €',''):'—';
-  $('gtot').textContent=grand>0?fmt(grand):'Inclut postes sur devis';
+  var tvH=tvR.map(function(r){
+    if(r.dev)return '<div class="brow" style="grid-template-columns:auto 1fr auto">'+pill(r.b)+'<div class="bref">'+r.r+(r.tag?'<span class="utag">'+r.tag+'</span>':'')+'</div><div class="bt" style="color:var(--mt);font-size:11px">Sur devis</div></div>';
+    return row(r.b,r.r,r.q,r.px,r.uk||null);
+  }).join('')+subrow('Sous-total Televic',tvT,'#78BE20');
+  var lmH=lmR.map(function(r){return r.dev?'<div class="brow" style="grid-template-columns:auto 1fr auto">'+pill(r.b)+'<div class="bref">'+r.r+'</div><div class="bt" style="color:var(--mt);font-size:11px">Sur devis</div></div>':row(r.b,r.r,r.q,r.px,r.uk||null);}).join('')+subrow('Sous-total Lumens',lmT,'#0066B3')+cN;
+  g('bomtv').innerHTML=tvH;g('bomlm').innerHTML=lmH;g('bomau').innerHTML=auH;
 
-  // Flow diagram
-  const pN={dcerno:`D-SL×${p}`,go:`GO×${p}`,flex4:`FLEX×${p}`,plixus:`FLEX×${p}`+(S.unicos?' +UC':'')}[S.sys];
-  $('diag').innerHTML=`<div class="db" style="background:#1A2E45">${short}</div><div class="da">→</div><div class="db" style="background:var(--tv)">${pN}</div><div class="da">→</div><div class="db" style="background:var(--lm)">CAM CONNECT</div><div class="da">→</div><div class="db" style="background:var(--lm)">${cM}×${nT}</div><div class="da">→</div><div class="db" style="background:var(--lea)">${(au.label||'Son').split('+')[0].trim()}</div>`;
+  var sysNames={dcerno:sysN,go:'Confidea GO G4',flex4:'Confidea FLEX G4',plixus:'Plixus FLEX'};
+  var sysLabel=uco?('Plixus MME + '+UCO[k].short):(sysNames[S.sys]||sysN);
+  g('sp').textContent=p;g('ssys').textContent=sysLabel;
+  g('ssf').textContent=surf+'m\u00B2';g('sau').textContent=au.lbl;
+  g('stot').textContent=grand>0?fmt(grand).replace(' \u20AC',''):'-';
+  g('gtot').textContent=grand>0?fmt(grand):'Inclut lignes sur devis';
 
-  // Room
-  const dl=rx&&ry?`${rx}×${ry}m = ${Math.round(rx*ry)}m²`:`~${surf}m² (estimé)`;
-  $('rdlbl').textContent=dl;
-  $('rsvg').innerHTML=drawRoom(rx,ry,nT,au.spkM,nSpkFinal,S.atype);
+  var pN=uco?('UniCOS\u00d7'+p):({dcerno:'D-SL\u00d7'+p,go:'GO\u00d7'+p,flex4:'FLEX\u00d7'+p,plixus:'FLEX\u00d7'+p}[S.sys]||'');
+  g('diag').innerHTML='<div class="db" style="background:#1A2E45">'+short+'</div><div class="da">\u2192</div><div class="db" style="background:'+(uco?'var(--uc)':'var(--tv)')+'">'+pN+'</div><div class="da">\u2192</div><div class="db" style="background:var(--lm)">CAM x'+nT+'</div><div class="da">\u2192</div><div class="db" style="background:var(--rk)">'+au.sm+(au.subModel&&caissonTot>0?' + Sub':'')+'</div>';
+  g('rdlbl').textContent=rx&&ry?(rx+'\u00d7'+ry+'m = '+Math.round(rx*ry)+'m\u00B2'):('~'+surf+'m\u00B2');
+  g('rsvg').innerHTML=drawRoom(rx,ry,nT,au.sm,au.nF,au.active,S.surface==='slope');
 
-  S._={tvT,lmT,auT:au.total,grand,sysN:sysNames[S.sys],cM,nT,auL:au.label,p,surf,rx,ry,dante};
-  if(!$('spanel').classList.contains('hid'))buildSum();
+  S._={tvT:tvT,lmT:lmT,auT:au.tot+caissonTot,grand:grand,sysL:sysLabel,cM:cM,nT:nT,auL:au.lbl,p:p,surf:surf,rx:rx,ry:ry,c:c,abudget:S.abudget,ausage:S.ausage,dante:dante,spkType:S.spkType};
+  if(g('spanel')&&!g('spanel').classList.contains('hid'))buildSum();
 }
 
 function buildSum(){
-  const _=S._;const d=new Date().toLocaleDateString('fr-FR');
-  const t=`TELEVIC CONFERENCE FRANCE — Configurateur Salle\nDate : ${d}\n${'─'.repeat(48)}\nCONFIGURATION\n  Postes     : ${_.p}\n  Système    : ${_.sysN}${S.unicos?' + UniCOS '+S.unicos:''}\n  Budget     : ${S.budget?'Avec':'Sans'} budget\n\nVIDÉO\n  CAM CONNECT + ${_.cM} × ${_.nT}\n\nACOUSTIQUE\n  Surface    : ${_.surf}m²${_.rx&&_.ry?' ('+_.rx+'×'+_.ry+'m)':''}\n  Pack       : ${_.auL||'—'}\n  Type       : ${S.atype==='active'?'Actif ICC':'Passif'} / ${S.acol==='column'?'Colonne':'Point source'}${_.dante?' +Dante':''}\n\n${'─'.repeat(48)}\n  Televic    : ${_.tvT>0?fmt(_.tvT):'—'}\n  Lumens     : ${fmt(_.lmT)}\n  Audio      : ${_.auT>0?fmt(_.auT):'Sur devis'}\n  TOTAL HT   : ${_.grand>0?fmt(_.grand):'Sur devis'}\n${'─'.repeat(48)}\ninfo-tcf@televic.com · 03 74 09 52 76`;
-  $('sumtxt').textContent=t;return t;
+  var _=S._;if(!_)return'';
+  var d=new Date().toLocaleDateString('fr-FR');
+  var nl='\n';
+  var spkLbl={auto:'Auto',point:'Point source',col:'Colonne'}[_.spkType]||'';
+  var t='TELEVIC CONFERENCE FRANCE - Configurateur Salle'+nl+'Date : '+d+nl+'='.repeat(50)+nl+'CONFIGURATION'+nl+'  Postes     : '+_.p+' ('+catLbl(_.c)+')'+nl+'  Systeme    : '+_.sysL+nl+'  Budget     : '+(S.budget?'Avec':'Sans')+' budget'+nl+nl+'VIDEO'+nl+'  '+_.cM+' x '+_.nT+' + CAM CONNECT'+nl+nl+'ACOUSTIQUE'+nl+'  Surface    : '+_.surf+'m2'+(_.rx&&_.ry?' ('+_.rx+'x'+_.ry+'m)':'')+nl+'  Budget     : '+(_.abudget==='eco'?'Eco':_.abudget==='std'?'Standard':'Premium')+nl+'  Type       : '+spkLbl+nl+'  Usage      : '+(_.ausage==='voice'?'Voix':'Voix + Media')+nl+'  Surface    : '+(S.surface==='flat'?'Plate':'En pente')+nl+'  Pack       : '+(_.auL||'-')+(_.dante?' +Dante':'')+nl+nl+'='.repeat(50)+nl+'  Televic    : '+(_.tvT>0?fmt(_.tvT):'-')+nl+'  Lumens     : '+fmt(_.lmT)+nl+'  Audio      : '+(_.auT>0?fmt(_.auT):'Sur devis')+nl+'  TOTAL HT   : '+(_.grand>0?fmt(_.grand):'Sur devis/projet')+nl+'='.repeat(50)+nl+'info-tcf@televic.com - 03 74 09 52 76';
+  if(g('sumtxt'))g('sumtxt').textContent=t;
+  return t;
 }
 
-function toggleSum(){const sp=$('spanel');const v=sp.classList.contains('hid');if(v){sp.classList.remove('hid');buildSum();}else sp.classList.add('hid');}
-function copySum(){const t=buildSum();navigator.clipboard.writeText(t).then(()=>alert('Copié')).catch(()=>prompt('Copier :',t));}
-
-function saveConf(){
-  const c={...S,camXtra,spkXtra};['_'].forEach(k=>delete c[k]);
-  localStorage.setItem('tcf_v7',JSON.stringify(c));alert('Sauvegardé');
+function syncUI(){
+  ton('bb-y','on',S.budget);ton('bb-n','on',!S.budget);
+  if(g('bnote'))g('bnote').textContent=S.budget?'Options premium, UniCOS et fonctionnalites avancees disponibles':'Configuration de base';
+  ['dcerno','go','flex4','plixus','uco-core','uco-pro','uco-mm10','uco-mm7'].forEach(function(k){
+    var el=g('sys-'+k);if(el)el.classList.toggle('on',S.sys===k);
+  });
+  ton('tb-disc','on',!S.evol);ton('tb-deci','on',S.evol);
+  ton('tb-cstd','on',!S.camPrem);ton('tb-cprem','on',S.camPrem);
+  ton('ba-eco','on',S.abudget==='eco');ton('ba-std','on',S.abudget==='std');ton('ba-prm','on',S.abudget==='prm');
+  ton('au-voice','on',S.ausage==='voice');ton('au-media','on',S.ausage==='media');
+  ton('tb-flat','on',S.surface==='flat');ton('tb-slope','on',S.surface==='slope');
+  ton('spk-auto','on',S.spkType==='auto');ton('spk-point','on',S.spkType==='point');ton('spk-col','on',S.spkType==='col');
 }
-function loadConf(){
-  const r=localStorage.getItem('tcf_v7');if(!r){alert('Aucune config');return;}
-  const c=JSON.parse(r);camXtra=c.camXtra||0;spkXtra=c.spkXtra||0;
-  $('slp').value=c._.p||10;$('sls').value=c._.surf||60;
-  if(c._.rx)$('rx').value=c._.rx;if(c._.ry)$('ry').value=c._.ry;
-  Object.assign(S,c);setBudget(S.budget);setSys(S.sys);setEvol(S.evol);setCamP(S.camPrem);setAT(S.atype);setAC(S.acol);
-  update();alert('Chargé');
-}
-function sendMail(){const t=buildSum();window.location.href=`mailto:info-tcf@televic.com?subject=${encodeURIComponent('Devis salle TCF')}&body=${encodeURIComponent(t)}`;}
+function saveConf(){var c=JSON.parse(JSON.stringify(S));c.camXtra=camXtra;c.spkXtra=spkXtra;delete c._;localStorage.setItem('tcf_v12',JSON.stringify(c));alert('Sauvegarde !');}
+function loadConf(){var r=localStorage.getItem('tcf_v12');if(!r){alert('Aucune configuration');return;}var c=JSON.parse(r);camXtra=c.camXtra||0;spkXtra=c.spkXtra||0;if(g('slp'))g('slp').value=(c._&&c._.p)||10;if(g('sls'))g('sls').value=(c._&&c._.surf)||60;Object.assign(S,c);syncUI();update();alert('Charge !');}
+function copySum(){var t=buildSum();navigator.clipboard.writeText(t).then(function(){alert('Copie !');}).catch(function(){prompt('Copier :',t);});}
+function toggleSum(){var sp=g('spanel');if(!sp)return;sp.classList.toggle('hid');buildSum();}
 
-update();
+function wire(){
+  g('mb-edit').onclick=function(){g('sidebar').classList.remove('hid');ton('mb-edit','on',true);ton('mb-read','on',false);};
+  g('mb-read').onclick=function(){g('sidebar').classList.add('hid');ton('mb-edit','on',false);ton('mb-read','on',true);};
+  g('bb-y').onclick=function(){S.budget=true;syncUI();update();};
+  g('bb-n').onclick=function(){S.budget=false;S.evol=false;S.camPrem=false;syncUI();update();};
+  ['dcerno','go','flex4','plixus','uco-core','uco-pro','uco-mm10','uco-mm7'].forEach(function(k){
+    var el=g('sys-'+k);if(el)el.onclick=function(){S.sys=k;if(k==='go')S.evol=false;syncUI();update();};
+  });
+  g('tb-disc').onclick=function(){if(!S.budget)return;S.evol=false;syncUI();update();};
+  g('tb-deci').onclick=function(){if(!S.budget||S.sys==='go')return;S.evol=true;syncUI();update();};
+  g('tb-cstd').onclick=function(){S.camPrem=false;syncUI();update();};
+  g('tb-cprem').onclick=function(){if(!S.budget)return;S.camPrem=true;syncUI();update();};
+  g('ba-eco').onclick=function(){S.abudget='eco';syncUI();update();};
+  g('ba-std').onclick=function(){S.abudget='std';syncUI();update();};
+  g('ba-prm').onclick=function(){if(!S.budget)return;S.abudget='prm';syncUI();update();};
+  g('au-voice').onclick=function(){S.ausage='voice';syncUI();update();};
+  g('au-media').onclick=function(){S.ausage='media';syncUI();update();};
+  g('tb-flat').onclick=function(){S.surface='flat';syncUI();update();};
+  g('tb-slope').onclick=function(){S.surface='slope';syncUI();update();};
+  g('spk-auto').onclick=function(){S.spkType='auto';syncUI();update();};
+  g('spk-point').onclick=function(){S.spkType='point';syncUI();update();};
+  g('spk-col').onclick=function(){S.spkType='col';syncUI();update();};
+  g('cam-m').onclick=function(){camXtra=Math.max(-8,camXtra-1);update();};
+  g('cam-p').onclick=function(){camXtra=Math.min(10,camXtra+1);update();};
+  g('spk-m').onclick=function(){spkXtra=Math.max(-4,spkXtra-1);update();};
+  g('spk-p').onclick=function(){spkXtra=Math.min(8,spkXtra+1);update();};
+  g('slp').oninput=update;g('sls').oninput=update;g('cb-dante').onchange=update;g('cb-caisson').onchange=update;
+  var dimH=function(){var x=parseFloat(g('rx').value)||0,y=parseFloat(g('ry').value)||0;if(x>0&&y>0){var sf=Math.round(x*y);g('sls').value=Math.min(250,Math.max(20,sf));g('dnote').textContent='= '+sf+' m\u00B2';}update();};
+  g('rx').oninput=dimH;g('ry').oninput=dimH;
+  ['decide','vote','id','c360'].forEach(function(k){var cb=g('cb-'+k);if(cb)cb.onchange=update;});
+  ['core','pro','mm10','mm7'].forEach(function(mk){
+    var el=g('upres-'+mk);if(!el)return;
+    el.onclick=function(){S.ucoPres=S.ucoPres===mk?'':mk;update();};
+  });
+  if(g('sl-pres-n'))g('sl-pres-n').oninput=update;
+  g('btn-print').onclick=function(){window.print();};
+  g('btn-copy').onclick=copySum;g('btn-copy2').onclick=copySum;
+  g('btn-save').onclick=saveConf;g('btn-load').onclick=loadConf;
+  g('btn-sum').onclick=toggleSum;
+  g('btn-mail').onclick=function(){var t=buildSum();window.location.href='mailto:info-tcf@televic.com?subject='+encodeURIComponent('Devis salle TCF')+'&body='+encodeURIComponent(t);};
+}
+wire();update();
+})();
 </script>
 </body>
 </html>
